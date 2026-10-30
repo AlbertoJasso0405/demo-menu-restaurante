@@ -66,6 +66,18 @@
       padding: 0 15px;
     }
 
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin: 25px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+    }
+
     .menu-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -260,6 +272,34 @@
       font-size: 0.9rem;
     }
 
+    .qty-picker {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .btn-qty-mod {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-number {
+      font-size: 1.2rem;
+      font-weight: bold;
+      width: 30px;
+      text-align: center;
+    }
+
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -302,7 +342,11 @@
   </header>
 
   <div class="container">
-    <div class="menu-grid" id="menu-grid"></div>
+    <div class="section-title"><i class="fas fa-utensils"></i> Platillos Principales</div>
+    <div class="menu-grid" id="dishes-grid"></div>
+
+    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Refrescos</div>
+    <div class="menu-grid" id="drinks-grid"></div>
   </div>
 
   <div class="cart-bar">
@@ -326,30 +370,39 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeCustomModal()">&times;</span>
       <h3 id="modal-item-title" style="margin-bottom: 5px;">Personalizar</h3>
-      <p id="modal-item-price" style="color: var(--secondary); font-weight: bold; margin-bottom: 15px;"></p>
+      <p id="modal-item-price" style="color: var(--secondary); font-weight: bold; margin-bottom: 10px;"></p>
 
-      <div class="form-group">
-        <label class="opt-title">Término / Especificación:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="term" value="Bien cocido / Estándar" checked> Bien cocido / Estándar</label>
-          <label><input type="radio" name="term" value="Término medio"> Término medio</label>
-          <label><input type="radio" name="term" value="Salsa aparte"> Salsa aparte</label>
+      <div class="qty-picker">
+        <span class="opt-title" style="margin:0;">Cantidad:</span>
+        <button class="btn-qty-mod" onclick="changeQty(-1)">-</button>
+        <span class="qty-number" id="modal-qty">1</span>
+        <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
+      </div>
+
+      <div id="dish-options">
+        <div class="form-group">
+          <label class="opt-title">Término / Especificación:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="term" value="Bien cocido / Estándar" checked> Bien cocido / Estándar</label>
+            <label><input type="radio" name="term" value="Término medio"> Término medio</label>
+            <label><input type="radio" name="term" value="Salsa aparte"> Salsa aparte</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="opt-title">Salsa o Aderezo Favorito:</label>
+          <select id="select-sauce">
+            <option value="Salsa Verde de la Casa">Salsa Verde de la Casa</option>
+            <option value="Salsa Macha con Arándano">Salsa Macha con Arándano</option>
+            <option value="Aderezo Chipotle / BBQ">Aderezo Chipotle / BBQ</option>
+            <option value="Sin Salsa / Sin Aderezo">Sin Salsa / Sin Aderezo</option>
+          </select>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="opt-title">Salsa o Aderezo Favorito:</label>
-        <select id="select-sauce">
-          <option value="Salsa Verde de la Casa">Salsa Verde de la Casa</option>
-          <option value="Salsa Macha con Arándano">Salsa Macha con Arándano</option>
-          <option value="Aderezo Chipotle / BBQ">Aderezo Chipotle / BBQ</option>
-          <option value="Sin Salsa / Sin Aderezo">Sin Salsa / Sin Aderezo</option>
-        </select>
-      </div>
-
-      <div class="form-group">
         <label class="opt-title">Instrucciones Especiales:</label>
-        <input type="text" id="custom-notes" placeholder="Ej. Sin cebolla, extra servilletas, etc.">
+        <input type="text" id="custom-notes" placeholder="Ej. Bien fría, sin cebolla, etc.">
       </div>
 
       <button class="btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;" onclick="confirmAddToCart()">
@@ -408,25 +461,37 @@
   </div>
 
   <script>
-    const products = [
-      { id: 1, name: "Hamburguesa Sabor & Fuego", price: 135, desc: "Carne sirloin 180g, queso cheddar fundido, tocino crujiente y aderezo especial.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80" },
-      { id: 2, name: "Pizza Artesanal Pepperoni", price: 175, desc: "Masa madre de fermentación lenta, salsa pomodoro, mozzarella y abundante pepperoni.", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80" },
-      { id: 3, name: "Tacos de Sirloin (4 pzs)", price: 140, desc: "Corte sirloin a la parrilla sobre tortilla de maíz recién hecha, guacamole y cebolla asada.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80" },
-      { id: 4, name: "Alitas BBQ / Búfalo (10 pzs)", price: 160, desc: "Crujientes alitas bañadas en tu salsa favorita, acompañadas de bastones de apio y zanahoria.", img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500&q=80" },
-      { id: 5, name: "Boneless Crujientes (300g)", price: 155, desc: "Pechuga de pollo empanizada al momento con papas a la francesa y aderezo ranch.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80" },
-      { id: 6, name: "Club Sándwich Tradicional", price: 120, desc: "Pollo a la plancha, jamón, queso, tocino, jitomate y lechuga en pan artesanal con papas.", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=500&q=80" },
-      { id: 7, name: "Burrito Gigante de Pastor", price: 130, desc: "Tortilla de harina de 30cm, carne al pastor, queso fundido, frijoles refritos y piña.", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=500&q=80" },
-      { id: 8, name: "Ensalada César con Pollo", price: 110, desc: "Pechuga a la parrilla, mezcla de lechugas, crutones horneados, parmesano y aderezo César.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80" },
-      { id: 9, name: "Papas Preparadas con Bacon", price: 90, desc: "Papas fritas sazonadas, bañadas en salsa de queso cheddar, bits de tocino y cebollín.", img: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=500&q=80" },
-      { id: 10, name: "Costillas BBQ (Media Orden)", price: 180, desc: "Costillas de cerdo horneadas lentamente, bañadas en BBQ ahumada con elote amarillo.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80" }
+    const dishes = [
+      { id: 1, name: "Hamburguesa Sabor & Fuego", price: 135, desc: "Carne sirloin 180g, queso cheddar fundido, tocino crujiente y aderezo especial.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 2, name: "Pizza Artesanal Pepperoni", price: 175, desc: "Masa madre de fermentación lenta, salsa pomodoro, mozzarella y abundante pepperoni.", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 3, name: "Tacos de Sirloin (4 pzs)", price: 140, desc: "Corte sirloin a la parrilla sobre tortilla de maíz recién hecha, guacamole y cebolla asada.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 4, name: "Alitas BBQ / Búfalo (10 pzs)", price: 160, desc: "Crujientes alitas bañadas en tu salsa favorita, acompañadas de bastones de apio y zanahoria.", img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 5, name: "Boneless Crujientes (300g)", price: 155, desc: "Pechuga de pollo empanizada al momento con papas a la francesa y aderezo ranch.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 6, name: "Club Sándwich Tradicional", price: 120, desc: "Pollo a la plancha, jamón, queso, tocino, jitomate y lechuga en pan artesanal con papas.", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 7, name: "Burrito Gigante de Pastor", price: 130, desc: "Tortilla de harina de 30cm, carne al pastor, queso fundido, frijoles refritos y piña.", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 8, name: "Ensalada César con Pollo", price: 110, desc: "Pechuga a la parrilla, mezcla de lechugas, crutones horneados, parmesano y aderezo César.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 9, name: "Papas Preparadas con Bacon", price: 90, desc: "Papas fritas sazonadas, bañadas en salsa de queso cheddar, bits de tocino y cebollín.", img: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 10, name: "Costillas BBQ (Media Orden)", price: 180, desc: "Costillas de cerdo horneadas lentamente, bañadas en BBQ ahumada con elote amarillo.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false }
+    ];
+
+    const drinks = [
+      { id: 101, name: "Refresco de Lata 355ml", price: 35, desc: "Coca-Cola, Coca Zero, Sprite, Mundet o Fanta (Frío).", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", isDrink: true },
+      { id: 102, name: "Agua de Sabor Natural (1 Litro)", price: 45, desc: "Horchata, Horchata con Fresa, Jamaica o Limón con Chía.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true },
+      { id: 103, name: "Cerveza Nacional 355ml", price: 45, desc: "Corona Extra, Victoria o Modelo Especial bien fría.", img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=500&q=80", isDrink: true },
+      { id: 104, name: "Limonada / Naranjada Mineral", price: 40, desc: "Preparada al momento con fruta natural y agua mineral.", img: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?auto=format&fit=crop&w=500&q=80", isDrink: true }
     ];
 
     let cart = [];
     let selectedProduct = null;
+    let currentQty = 1;
 
     function renderMenu() {
-      const container = document.getElementById('menu-grid');
-      container.innerHTML = products.map(p => `
+      document.getElementById('dishes-grid').innerHTML = dishes.map(p => createCardHTML(p)).join('');
+      document.getElementById('drinks-grid').innerHTML = drinks.map(p => createCardHTML(p)).join('');
+    }
+
+    function createCardHTML(p) {
+      return `
         <div class="card">
           <img src="${p.img}" alt="${p.name}">
           <div class="card-body">
@@ -440,15 +505,27 @@
             </div>
           </div>
         </div>
-      `).join('');
+      `;
     }
 
     function openCustomModal(id) {
-      selectedProduct = products.find(p => p.id === id);
+      selectedProduct = [...dishes, ...drinks].find(p => p.id === id);
+      currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
       document.getElementById('modal-item-title').innerText = selectedProduct.name;
-      document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN`;
+      document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
+
+      // Ocultar opciones de cocina si es bebida
+      document.getElementById('dish-options').style.display = selectedProduct.isDrink ? 'none' : 'block';
+
       document.getElementById('custom-modal').style.display = 'flex';
+    }
+
+    function changeQty(delta) {
+      currentQty += delta;
+      if (currentQty < 1) currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
     }
 
     function closeCustomModal() {
@@ -456,13 +533,14 @@
     }
 
     function confirmAddToCart() {
-      const term = document.querySelector('input[name="term"]:checked').value;
-      const sauce = document.getElementById('select-sauce').value;
+      const term = selectedProduct.isDrink ? 'Bebida' : document.querySelector('input[name="term"]:checked').value;
+      const sauce = selectedProduct.isDrink ? 'N/A' : document.getElementById('select-sauce').value;
       const notes = document.getElementById('custom-notes').value;
 
       const itemDetail = {
         ...selectedProduct,
         cartId: Date.now(),
+        qty: currentQty,
         term,
         sauce,
         notes
@@ -480,11 +558,13 @@
     }
 
     function updateTotal() {
-      const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
       const deliveryVal = parseInt(document.getElementById('delivery-zone').value.split('|')[0] || 0);
       const grandTotal = subtotal + deliveryVal;
 
-      document.getElementById('cart-count').innerText = cart.length;
+      const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+      document.getElementById('cart-count').innerText = totalItemsCount;
       document.getElementById('cart-total').innerText = `$${subtotal}.00`;
       document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
     }
@@ -499,9 +579,9 @@
       list.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div>
-            <strong style="font-size:0.95rem;">${item.name}</strong> - $${item.price}
+            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
             <div style="font-size:0.75rem; color: var(--text-muted);">
-              ${item.term} | ${item.sauce} ${item.notes ? '| Nota: ' + item.notes : ''}
+              ${!item.isDrink ? item.term + ' | ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
           <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:red;">&times;</button>
@@ -511,7 +591,7 @@
 
     function openCheckoutModal() {
       if (cart.length === 0) {
-        alert("Agrega al menos un platillo al carrito.");
+        alert("Agrega al menos un platillo o bebida al carrito.");
         return;
       }
       renderCartList();
@@ -536,7 +616,7 @@
         return;
       }
 
-      let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕\n\n`;
+      let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
       message += `*Cliente:* ${name}\n`;
       message += `*Dirección:* ${address}\n`;
       message += `*Zona/Entrega:* ${zoneName}\n`;
@@ -545,10 +625,13 @@
 
       let subtotal = 0;
       cart.forEach((item, index) => {
-        subtotal += item.price;
-        message += `\n*${index + 1}. ${item.name}* ($${item.price})\n`;
-        message += `   • Especificación: ${item.term}\n`;
-        message += `   • Salsa: ${item.sauce}\n`;
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
+        if(!item.isDrink) {
+          message += `   • Especificación: ${item.term}\n`;
+          message += `   • Salsa: ${item.sauce}\n`;
+        }
         if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
 
