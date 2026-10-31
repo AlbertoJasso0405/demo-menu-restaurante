@@ -423,7 +423,7 @@
 
       <div class="form-group">
         <label>Tipo de Entrega / Zona:</label>
-        <select id="delivery-zone" onchange="updateTotal()">
+        <select id="delivery-zone" onchange="handleDeliveryChange()">
           <option value="0|Pasar a recoger al local (Sin costo)">Pasar a recoger al local - $0</option>
           <option value="25|Zona Centro / Tizayuca Cercano">Zona Centro / Cercana - $25</option>
           <option value="35|Zona Norte / Sur (Hidalgo)">Zona Norte / Sur - $35</option>
@@ -436,7 +436,7 @@
         <input type="text" id="client-name" placeholder="Ej. Alberto Jasso">
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="address-group" style="display: none;">
         <label>Dirección de Entrega / Referencia:</label>
         <input type="text" id="client-address" placeholder="Ej. Av. Principal #123, Col. Centro">
       </div>
@@ -444,9 +444,9 @@
       <div class="form-group">
         <label>Método de Pago:</label>
         <select id="payment-method">
-          <option value="Efectivo (Pago al entregar)">Efectivo (Pago al entregar)</option>
-          <option value="Transferencia BBVA / STP">Transferencia Bancaria</option>
-          <option value="Pago con Tarjeta al entregar">Tarjeta (Terminal física)</option>
+          <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
+          <option value="Transferencia">Transferencia Bancaria (STP / Mercado Pago)</option>
+          <option value="Tarjeta">Tarjeta de Débito / Crédito (Terminal física)</option>
         </select>
       </div>
 
@@ -496,29 +496,11 @@
           <img src="${p.img}" alt="${p.name}">
           <div class="card-body">
             <div class="card-title">${p.name}</div>
-            <div class="card-desc">${p.desc}</div>
-            <div class="card-footer">
-              <span class="price">$${p.price}</span>
-              <button class="btn-add" onclick="openCustomModal(${p.id})">
-                <i class="fas fa-plus"></i> Agregar
-              </button>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    function openCustomModal(id) {
-      selectedProduct = [...dishes, ...drinks].find(p => p.id === id);
-      currentQty = 1;
-      document.getElementById('modal-qty').innerText = currentQty;
-      document.getElementById('modal-item-title').innerText = selectedProduct.name;
-      document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
+            <div class="card-desc">${p.desc}</div> <div class="card-footer"> <span class="price">$${p.price}</span>
+              <button class="btn-add" onclick="openCustomModal(${p.id})"> <i class="fas fa-plus"></i> Agregar </button> </div> </div> </div> `; }  function openCustomModal(id) { selectedProduct = [...dishes, ...drinks].find(p => p.id === id); currentQty = 1; document.getElementById('modal-qty').innerText = currentQty; document.getElementById('modal-item-title').innerText = selectedProduct.name; document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
-      // Ocultar opciones de cocina si es bebida
       document.getElementById('dish-options').style.display = selectedProduct.isDrink ? 'none' : 'block';
-
       document.getElementById('custom-modal').style.display = 'flex';
     }
 
@@ -557,6 +539,19 @@
       renderCartList();
     }
 
+    function handleDeliveryChange() {
+      const zoneData = document.getElementById('delivery-zone').value.split('|');
+      const deliveryCost = parseInt(zoneData[0]);
+      const addressGroup = document.getElementById('address-group');
+
+      if (deliveryCost === 0) {
+        addressGroup.style.display = 'none';
+      } else {
+        addressGroup.style.display = 'block';
+      }
+      updateTotal();
+    }
+
     function updateTotal() {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
       const deliveryVal = parseInt(document.getElementById('delivery-zone').value.split('|')[0] || 0);
@@ -565,8 +560,7 @@
       const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
       document.getElementById('cart-count').innerText = totalItemsCount;
-      document.getElementById('cart-total').innerText = `$${subtotal}.00`;
-      document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
+      document.getElementById('cart-total').innerText = `$${subtotal}.00`; document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
     }
 
     function renderCartList() {
@@ -579,9 +573,9 @@
       list.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div>
-            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
+            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> -$${item.price * item.qty}
             <div style="font-size:0.75rem; color: var(--text-muted);">
-              ${!item.isDrink ? item.term + ' | ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
+              ${!item.isDrink ? item.term + ' \vert{} ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
           <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:red;">&times;</button>
@@ -595,7 +589,7 @@
         return;
       }
       renderCartList();
-      updateTotal();
+      handleDeliveryChange();
       document.getElementById('checkout-modal').style.display = 'flex';
     }
 
@@ -605,51 +599,40 @@
 
     function sendWhatsAppOrder() {
       const name = document.getElementById('client-name').value.trim();
-      const address = document.getElementById('client-address').value.trim();
-      const payment = document.getElementById('payment-method').value;
+      const paymentType = document.getElementById('payment-method').value;
       const zoneData = document.getElementById('delivery-zone').value.split('|');
       const deliveryCost = parseInt(zoneData[0]);
       const zoneName = zoneData[1];
+      const address = document.getElementById('client-address').value.trim();
 
-      if (!name || !address) {
-        alert("Por favor ingresa tu nombre y dirección para completar el pedido.");
+      if (!name) {
+        alert("Por favor ingresa tu nombre.");
+        return;
+      }
+
+      if (deliveryCost > 0 && !address) {
+        alert("Por favor ingresa tu dirección para el envío a domicilio.");
         return;
       }
 
       let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
       message += `*Cliente:* ${name}\n`;
-      message += `*Dirección:* ${address}\n`;
-      message += `*Zona/Entrega:* ${zoneName}\n`;
-      message += `*Forma de pago:* ${payment}\n\n`;
+      message += `*Modalidad:* ${zoneName}\n`; if (deliveryCost > 0) { message += `*Dirección:* ${address}\n`;
+      }
+      message += `*Método de Pago:* ${paymentType}\n\n`;
+
       message += `--- *DETALLE DEL PEDIDO* ---\n`;
 
       let subtotal = 0;
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         subtotal += itemTotal;
-        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
-        if(!item.isDrink) {
-          message += `   • Especificación: ${item.term}\n`;
-          message += `   • Salsa: ${item.sauce}\n`;
-        }
-        if (item.notes) message += `   • Nota: ${item.notes}\n`;
+        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`; if(!item.isDrink) { message += `   • Especificación: ${item.term}\n`;
+          message += `   • Salsa: ${item.sauce}\n`; } if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
 
       const grandTotal = subtotal + deliveryCost;
 
       message += `\n---------------------------\n`;
-      message += `*Subtotal:* $${subtotal}.00 MXN\n`;
-      message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
-      message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
-      message += `¡Quedo a la espera de su confirmación!`;
-
-      const phone = "527792179612";
-      const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      
-      window.open(encodedUrl, '_blank');
-    }
-
-    renderMenu();
-  </script>
-</body>
-</html>
+      message += `*Subtotal:* $${subtotal}.00 MXN\n`; message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
+      message += `*TOTAL A PAGAR:*
