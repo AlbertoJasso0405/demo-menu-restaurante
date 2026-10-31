@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sabor & Fuego - Menú Digital</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5MXSF5M7S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H5MXSF5M7S');
+  </script>
+
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
@@ -545,6 +556,16 @@
       };
 
       cart.push(itemDetail);
+
+      // Evento GA4: Agregar al carrito
+      if (typeof gtag === 'function') {
+        gtag('event', 'add_to_cart', {
+          item_name: selectedProduct.name,
+          value: selectedProduct.price * currentQty,
+          currency: 'MXN'
+        });
+      }
+
       closeCustomModal();
       updateTotal();
     }
@@ -632,56 +653,19 @@
         return;
       }
 
-      let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
-      message += `*Cliente:* ${name}\n`;
-      message += `*Modalidad:* ${zoneName}\n`;
-      if (deliveryCost > 0) {
-        message += `*Dirección:* ${address}\n`;
-      }
-      message += `*Método de Pago:* ${paymentType}\n\n`;
-
-      message += `--- *DETALLE DEL PEDIDO* ---\n`;
-
       let subtotal = 0;
-      cart.forEach((item, index) => {
-        const itemTotal = item.price * item.qty;
-        subtotal += itemTotal;
-        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
-        if(!item.isDrink) {
-          message += `   • Especificación: ${item.term}\n`;
-          message += `   • Salsa: ${item.sauce}\n`;
-        }
-        if (item.notes) message += `   • Nota: ${item.notes}\n`;
-      });
-
+      cart.forEach(item => subtotal += (item.price * item.qty));
       const grandTotal = subtotal + deliveryCost;
 
-      message += `\n---------------------------\n`;
-      message += `*Subtotal:* $${subtotal}.00 MXN\n`;
-      message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
-      message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
-
-      if (paymentType === 'Transferencia') {
-        message += `📌 *DATOS PARA TRANSFERENCIA:* \n`;
-        message += `• *Banco/Plataforma:* Mercado Pago (STP)\n`;
-        message += `• *CLABE:* 722969010658559464\n`;
-        message += `• *Titular:* Juan Alberto Jasso Chavez\n`;
-        message += `👉 *Por favor adjunta la captura del pago a este mensaje para comenzar la preparación.*\n`;
-      } else if (paymentType === 'Efectivo') {
-        message += `📌 *NOTA PAGO EN EFECTIVO:* \n`;
-        message += `👉 Por favor ten la cantidad exacta o indícanos aquí si requieres cambio de qué billete.\n`;
-      } else if (paymentType === 'Tarjeta') {
-        message += `📌 *NOTA PAGO CON TARJETA:* \n`;
-        message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
+      // Evento GA4: Click en Enviar WhatsApp (Lead/Conversión)
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          currency: 'MXN',
+          value: grandTotal,
+          payment_type: paymentType,
+          delivery_zone: zoneName
+        });
       }
 
-      const phone = "527792179612";
-      const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      
-      window.open(encodedUrl, '_blank');
-    }
-
-    renderMenu();
-  </script>
-</body>
-</html>
+      let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
+      message +=
