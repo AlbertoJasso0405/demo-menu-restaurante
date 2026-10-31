@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -557,7 +558,6 @@
 
       cart.push(itemDetail);
 
-      // Evento GA4: Agregar al carrito
       if (typeof gtag === 'function') {
         gtag('event', 'add_to_cart', {
           item_name: selectedProduct.name,
@@ -657,7 +657,6 @@
       cart.forEach(item => subtotal += (item.price * item.qty));
       const grandTotal = subtotal + deliveryCost;
 
-      // Evento GA4: Click en Enviar WhatsApp (Lead/Conversión)
       if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {
           currency: 'MXN',
@@ -668,4 +667,51 @@
       }
 
       let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
-      message +=
+      message += `*Cliente:* ${name}\n`;
+      message += `*Modalidad:* ${zoneName}\n`;
+      if (deliveryCost > 0) {
+        message += `*Dirección:* ${address}\n`;
+      }
+      message += `*Método de Pago:* ${paymentType}\n\n`;
+
+      message += `--- *DETALLE DEL PEDIDO* ---\n`;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.qty;
+        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
+        if(!item.isDrink) {
+          message += `   • Especificación: ${item.term}\n`;
+          message += `   • Salsa: ${item.sauce}\n`;
+        }
+        if (item.notes) message += `   • Nota: ${item.notes}\n`;
+      });
+
+      message += `\n---------------------------\n`;
+      message += `*Subtotal:* $${subtotal}.00 MXN\n`;
+      message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
+      message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
+
+      if (paymentType === 'Transferencia') {
+        message += `📌 *DATOS PARA TRANSFERENCIA:* \n`;
+        message += `• *Banco/Plataforma:* Mercado Pago (STP)\n`;
+        message += `• *CLABE:* 722969010658559464\n`;
+        message += `• *Titular:* Juan Alberto Jasso Chavez\n`;
+        message += `👉 *Por favor adjunta la captura del pago a este mensaje para comenzar la preparación.*\n`;
+      } else if (paymentType === 'Efectivo') {
+        message += `📌 *NOTA PAGO EN EFECTIVO:* \n`;
+        message += `👉 Por favor ten la cantidad exacta o indícanos aquí si requieres cambio de qué billete.\n`;
+      } else if (paymentType === 'Tarjeta') {
+        message += `📌 *NOTA PAGO CON TARJETA:* \n`;
+        message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
+      }
+
+      const phone = "527792179612";
+      const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      
+      window.open(encodedUrl, '_blank');
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
