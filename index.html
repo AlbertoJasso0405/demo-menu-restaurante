@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -482,7 +481,7 @@
       { id: 6, name: "Club Sándwich Tradicional", price: 120, desc: "Pollo a la plancha, jamón, queso, tocino, jitomate y lechuga en pan artesanal con papas.", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=500&q=80", isDrink: false },
       { id: 7, name: "Burrito Gigante de Pastor", price: 130, desc: "Tortilla de harina de 30cm, carne al pastor, queso fundido, frijoles refritos y piña.", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=500&q=80", isDrink: false },
       { id: 8, name: "Ensalada César con Pollo", price: 110, desc: "Pechuga a la parrilla, mezcla de lechugas, crutones horneados, parmesano y aderezo César.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 9, name: "Papas Preparadas con Bacon", price: 90, desc: "Papas fritas sazonadas, bañadas en salsa de queso cheddar, bits de tocino y cebollín.", img: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 9, name: "Papas Preparadas con Bacon", price: 90, desc: "Papas fritas sazonadas, bañadas en salsa de queso cheddar, bits de tocino y cebollín.", img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=80", isDrink: false },
       { id: 10, name: "Costillas BBQ (Media Orden)", price: 180, desc: "Costillas de cerdo horneadas lentamente, bañadas en BBQ ahumada con elote amarillo.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false }
     ];
 
@@ -708,7 +707,11 @@
       const phone = "527792179612";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
       
+      // Abre WhatsApp en pestaña nueva
       window.open(encodedUrl, '_blank');
+
+      // Redirecciona automáticamente a la página de gracias
+      window.location.href = "gracias.html";
     }
 
     renderMenu();
