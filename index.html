@@ -496,8 +496,24 @@
           <img src="${p.img}" alt="${p.name}">
           <div class="card-body">
             <div class="card-title">${p.name}</div>
-            <div class="card-desc">${p.desc}</div> <div class="card-footer"> <span class="price">$${p.price}</span>
-              <button class="btn-add" onclick="openCustomModal(${p.id})"> <i class="fas fa-plus"></i> Agregar </button> </div> </div> </div> `; }  function openCustomModal(id) { selectedProduct = [...dishes, ...drinks].find(p => p.id === id); currentQty = 1; document.getElementById('modal-qty').innerText = currentQty; document.getElementById('modal-item-title').innerText = selectedProduct.name; document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
+            <div class="card-desc">${p.desc}</div>
+            <div class="card-footer">
+              <span class="price">$${p.price}</span>
+              <button class="btn-add" onclick="openCustomModal(${p.id})">
+                <i class="fas fa-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function openCustomModal(id) {
+      selectedProduct = [...dishes, ...drinks].find(p => p.id === id);
+      currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
+      document.getElementById('modal-item-title').innerText = selectedProduct.name;
+      document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
       document.getElementById('dish-options').style.display = selectedProduct.isDrink ? 'none' : 'block';
@@ -560,7 +576,8 @@
       const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
 
       document.getElementById('cart-count').innerText = totalItemsCount;
-      document.getElementById('cart-total').innerText = `$${subtotal}.00`; document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
+      document.getElementById('cart-total').innerText = `$${subtotal}.00`;
+      document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
     }
 
     function renderCartList() {
@@ -573,9 +590,9 @@
       list.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div>
-            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> -$${item.price * item.qty}
+            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
             <div style="font-size:0.75rem; color: var(--text-muted);">
-              ${!item.isDrink ? item.term + ' \vert{} ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
+              ${!item.isDrink ? item.term + ' | ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
           <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:red;">&times;</button>
@@ -617,7 +634,9 @@
 
       let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
       message += `*Cliente:* ${name}\n`;
-      message += `*Modalidad:* ${zoneName}\n`; if (deliveryCost > 0) { message += `*Dirección:* ${address}\n`;
+      message += `*Modalidad:* ${zoneName}\n`;
+      if (deliveryCost > 0) {
+        message += `*Dirección:* ${address}\n`;
       }
       message += `*Método de Pago:* ${paymentType}\n\n`;
 
@@ -627,12 +646,42 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         subtotal += itemTotal;
-        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`; if(!item.isDrink) { message += `   • Especificación: ${item.term}\n`;
-          message += `   • Salsa: ${item.sauce}\n`; } if (item.notes) message += `   • Nota: ${item.notes}\n`;
+        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
+        if(!item.isDrink) {
+          message += `   • Especificación: ${item.term}\n`;
+          message += `   • Salsa: ${item.sauce}\n`;
+        }
+        if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
 
       const grandTotal = subtotal + deliveryCost;
 
       message += `\n---------------------------\n`;
-      message += `*Subtotal:* $${subtotal}.00 MXN\n`; message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
-      message += `*TOTAL A PAGAR:*
+      message += `*Subtotal:* $${subtotal}.00 MXN\n`;
+      message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
+      message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
+
+      if (paymentType === 'Transferencia') {
+        message += `📌 *DATOS PARA TRANSFERENCIA:* \n`;
+        message += `• *Banco/Plataforma:* Mercado Pago (STP)\n`;
+        message += `• *CLABE:* 722969010658559464\n`;
+        message += `• *Titular:* Juan Alberto Jasso Chavez\n`;
+        message += `👉 *Por favor adjunta la captura del pago a este mensaje para comenzar la preparación.*\n`;
+      } else if (paymentType === 'Efectivo') {
+        message += `📌 *NOTA PAGO EN EFECTIVO:* \n`;
+        message += `👉 Por favor ten la cantidad exacta o indícanos aquí si requieres cambio de qué billete.\n`;
+      } else if (paymentType === 'Tarjeta') {
+        message += `📌 *NOTA PAGO CON TARJETA:* \n`;
+        message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
+      }
+
+      const phone = "527792179612";
+      const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      
+      window.open(encodedUrl, '_blank');
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
