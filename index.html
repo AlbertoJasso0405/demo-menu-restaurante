@@ -706,11 +706,11 @@
 
       const phone = "527792179612";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-      
-      // Abre WhatsApp en pestaña nueva
-      window.open(encodedUrl, '_blank');
 
-      // Redirecciona automáticamente a la página de gracias
+      // Guarda la URL codificada en el almacenamiento de la sesión
+      sessionStorage.setItem('wa_url', encodedUrl);
+
+      // Redirecciona directamente a la página de gracias
       window.location.href = "gracias.html";
     }
 
