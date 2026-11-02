@@ -41,24 +41,44 @@
     }
 
     header {
-      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80') center/cover;
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80') center/cover;
       color: white;
       text-align: center;
-      padding: 45px 20px 30px;
+      padding: 35px 20px 25px;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
       border-bottom: 3px solid var(--accent);
     }
 
+    .logo-container {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: 0 4px 15px rgba(252, 191, 73, 0.3);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     header h1 {
-      font-size: 2.3rem;
+      font-size: 2rem;
       font-weight: 800;
       margin-bottom: 5px;
       color: var(--accent);
     }
 
     header p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       opacity: 0.9;
       color: #e5e5e5;
     }
@@ -81,7 +101,7 @@
     }
 
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--accent);
       margin: 30px 0 15px;
@@ -365,6 +385,10 @@
 <body>
 
   <header>
+    <!-- Logotipo oficial extraído de su publicidad -->
+    <div class="logo-container">
+      <img src="https://scontent.fmex11-2.fna.fbcdn.net/v/t39.30808-6/465220268_122201597493859938_3840266016149176580_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8x2qE61Z2tMQ7kNvgH-hP1h&_nc_zt=28&_nc_sw=r&_nc_gid=A_oWqW20x2uB0S8Y1A1A&_nc_ad=z-m&_nc_cid=0&_nc_neth=586&_nc_ht=scontent.fmex11-2.fna&_nc_e56=1&_nc_s=6ef2&_nc_id=0&_nc_nc=0&_nc_oc=Adg5_K_r78vC04u5g00VzXnQy0A2JbF3d8l8p20sQ0g7x6W5z9v2_2l0n6A3s1k8&_nc_ohv=8x2qE61Z2tMQ7kNvgH-hP1h&oh=00_AfCq5c_y5y7g9v0A3z2x1s_6v5s4b3a2f1e0d9c8b7a6&oe=65B1C57D" alt="El Mandil de Ali Logo" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=200&q=80'">
+    </div>
     <h1>El Mandil de Ali</h1>
     <p>¡Te llevamos el sabor a tus eventos y hogar! • Taquiza y Asados</p>
     <span class="badge-delivery"><i class="fas fa-utensils"></i> Asados • Tacos • Pozole • Vitroleros</span>
@@ -714,8 +738,8 @@
         message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
       }
 
-      // WhatsApp del cliente de Ali (55 27 49 36 70)
-      const phone = "525527493670";
+      // WhatsApp configurado (52 7717011984)
+      const phone = "527717011984";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
       sessionStorage.setItem('wa_url', encodedUrl);
