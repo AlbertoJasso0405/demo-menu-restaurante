@@ -385,7 +385,6 @@
 <body>
 
   <header>
-    <!-- Logotipo oficial extraído de su publicidad -->
     <div class="logo-container">
       <img src="https://scontent.fmex11-2.fna.fbcdn.net/v/t39.30808-6/465220268_122201597493859938_3840266016149176580_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8x2qE61Z2tMQ7kNvgH-hP1h&_nc_zt=28&_nc_sw=r&_nc_gid=A_oWqW20x2uB0S8Y1A1A&_nc_ad=z-m&_nc_cid=0&_nc_neth=586&_nc_ht=scontent.fmex11-2.fna&_nc_e56=1&_nc_s=6ef2&_nc_id=0&_nc_nc=0&_nc_oc=Adg5_K_r78vC04u5g00VzXnQy0A2JbF3d8l8p20sQ0g7x6W5z9v2_2l0n6A3s1k8&_nc_ohv=8x2qE61Z2tMQ7kNvgH-hP1h&oh=00_AfCq5c_y5y7g9v0A3z2x1s_6v5s4b3a2f1e0d9c8b7a6&oe=65B1C57D" alt="El Mandil de Ali Logo" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=200&q=80'">
     </div>
@@ -738,12 +737,12 @@
         message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
       }
 
-      // WhatsApp configurado (52 7717011984)
       const phone = "527717011984";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-      sessionStorage.setItem('wa_url', encodedUrl);
-      window.location.href = "../gracias.html";
+      // Abre WhatsApp directamente de forma limpia y garantizada
+      window.open(encodedUrl, '_blank');
+      closeCheckoutModal();
     }
 
     renderMenu();
