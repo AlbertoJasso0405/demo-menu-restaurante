@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Medil de Ali - Menú Digital Interactivo</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5MXSF5M7S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H5MXSF5M7S');
+  </script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d90429;
+      --secondary: #2b2d42;
+      --bg-light: #f8f9fa;
+      --card-bg: #ffffff;
+      --text-dark: #212529;
+      --text-muted: #6c757d;
+      --accent: #ef233c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      padding-bottom: 90px;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80') center/cover;
+      color: white;
+      text-align: center;
+      padding: 45px 20px 30px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .badge-delivery {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin: 25px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 8px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .btn-add {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover {
+      background-color: #b8001f;
+    }
+
+    .cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.12);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .cart-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-icon-wrap {
+      position: relative;
+      background: var(--secondary);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-total {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .btn-checkout {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .modal-content {
+      background: white;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 12px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px; right: 15px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .qty-picker {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .btn-qty-mod {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-number {
+      font-size: 1.2rem;
+      font-weight: bold;
+      width: 30px;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 8px 0;
+    }
+
+    .btn-qty {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f0f0f0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .opt-title {
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin: 10px 0 5px;
+    }
+
+    .radio-group label {
+      display: block;
+      font-weight: normal;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>El Medil de Ali</h1>
+    <p>Cocina Tradicional • Sabor Casero a Domicilio</p>
+    <span class="badge-delivery"><i class="fas fa-motorcycle"></i> Pedidos para Llevar / Servicio a Domicilio</span>
+  </header>
+
+  <div class="container">
+    <div class="section-title"><i class="fas fa-utensils"></i> Especialidades del Día</div>
+    <div class="menu-grid" id="dishes-grid"></div>
+
+    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Postres</div>
+    <div class="menu-grid" id="drinks-grid"></div>
+  </div>
+
+  <div class="cart-bar">
+    <div class="cart-info">
+      <div class="cart-icon-wrap">
+        <i class="fas fa-shopping-bag"></i>
+        <div class="cart-count" id="cart-count">0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-muted);">Total estimado</div>
+        <div class="cart-total" id="cart-total">$0.00</div>
+      </div>
+    </div>
+    <button class="btn-checkout" onclick="openCheckoutModal()">
+       Ver Pedido
+    </button>
+  </div>
+
+  <!-- Modal de Personalización -->
+  <div class="modal" id="custom-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeCustomModal()">&times;</span>
+      <h3 id="modal-item-title" style="margin-bottom: 5px;">Personalizar</h3>
+      <p id="modal-item-price" style="color: var(--secondary); font-weight: bold; margin-bottom: 10px;"></p>
+
+      <div class="qty-picker">
+        <span class="opt-title" style="margin:0;">Cantidad:</span>
+        <button class="btn-qty-mod" onclick="changeQty(-1)">-</button>
+        <span class="qty-number" id="modal-qty">1</span>
+        <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
+      </div>
+
+      <div id="dish-options">
+        <div class="form-group">
+          <label class="opt-title">Término / Preparación:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="term" value="Preparación Tradicional" checked> Preparación Tradicional</label>
+            <label><input type="radio" name="term" value="Con poco picante / Sin picante"> Con poco picante / Sin picante</label>
+            <label><input type="radio" name="term" value="Salsa o Complemento Aparte"> Salsa o Complemento Aparte</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="opt-title">Complemento Favorito:</label>
+          <select id="select-sauce">
+            <option value="Salsa Roja de la Casa">Salsa Roja de la Casa</option>
+            <option value="Salsa Verde Casera">Salsa Verde Casera</option>
+            <option value="Frijoles Refritos Extra">Frijoles Refritos Extra</option>
+            <option value="Sin Salsa / Sin Extra">Sin Salsa / Sin Extra</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="opt-title">Instrucciones Especiales:</label>
+        <input type="text" id="custom-notes" placeholder="Ej. Sin cebolla, tortillas bien calientitas, etc.">
+      </div>
+
+      <button class="btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;" onclick="confirmAddToCart()">
+        Agregar al Carrito
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Checkout / Confirmación -->
+  <div class="modal" id="checkout-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+      <h3 style="margin-bottom: 15px;">Resumen de tu Pedido</h3>
+      
+      <div id="cart-list" style="margin-bottom: 15px;"></div>
+
+      <hr style="margin: 10px 0; border: none; border-top: 1px solid #eee;">
+
+      <div class="form-group">
+        <label>Tipo de Entrega / Zona:</label>
+        <select id="delivery-zone" onchange="handleDeliveryChange()">
+          <option value="0|Pasar a recoger al local (Sin costo)">Pasar a recoger al local - $0</option>
+          <option value="20|Servicio a Domicilio Zona Cercana">Servicio a Domicilio Zona Cercana - $20</option>
+          <option value="35|Servicio a Domicilio Zona Extendida">Servicio a Domicilio Zona Extendida - $35</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Nombre del Cliente:</label>
+        <input type="text" id="client-name" placeholder="Ej. Alberto Jasso">
+      </div>
+
+      <div class="form-group" id="address-group" style="display: none;">
+        <label>Dirección de Entrega / Referencia:</label>
+        <input type="text" id="client-address" placeholder="Ej. Av. Hidalgo #45, Col. Centro">
+      </div>
+
+      <div class="form-group">
+        <label>Método de Pago:</label>
+        <select id="payment-method">
+          <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
+          <option value="Transferencia">Transferencia Bancaria (STP / Mercado Pago)</option>
+          <option value="Tarjeta">Tarjeta de Débito / Crédito (Terminal física)</option>
+        </select>
+      </div>
+
+      <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0;" id="final-total">
+        Total: $0.00
+      </div>
+
+      <button class="btn-checkout" style="width: 100%; justify-content: center; padding: 12px;" onclick="sendWhatsAppOrder()">
+        <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Enviar Pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const dishes = [
+      { id: 1, name: "Guisado Casero del Día", price: 95, desc: "Acompañado de arroz, frijoles caseros y tortillas de maíz recién hechas.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 2, name: "Orden de Tacos Especiales (4 pzs)", price: 110, desc: "Guisados a elegir sobre tortillas calientitas con cebollitas y guacamole.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 3, name: "Pechuga Empanizada Crujiente", price: 120, desc: "Servida con ensalada fresca, papas a la francesa y guarnición de arroz.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 4, name: "Milanesa de Res Especial", price: 130, desc: "Corte suave empanizado al momento con papas fritas y ensalada del día.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 5, name: "Enchiladas Verdes o Rojas (4 pzs)", price: 105, desc: "Rellenas de pollo deshebrado, bañadas en salsa casera, crema, queso fresco y cebolla.", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=500&q=80", isDrink: false }
+    ];
+
+    const drinks = [
+      { id: 101, name: "Agua de Sabor Natural (1 Litro)", price: 40, desc: "Horchata, Jamaica, Limón con Chía o Fruta de Temporada.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true },
+      { id: 102, name: "Refresco de Lata 355ml", price: 30, desc: "Coca-Cola, Sprite, Mundet o Sidral bien frío.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", isDrink: true },
+      { id: 103, name: "Postre Casero de la Casa", price: 45, desc: "Flan napolitano o arroz con leche tradicional.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80", isDrink: true }
+    ];
+
+    let cart = [];
+    let selectedProduct = null;
+    let currentQty = 1;
+
+    function renderMenu() {
+      document.getElementById('dishes-grid').innerHTML = dishes.map(p => createCardHTML(p)).join('');
+      document.getElementById('drinks-grid').innerHTML = drinks.map(p => createCardHTML(p)).join('');
+    }
+
+    function createCardHTML(p) {
+      return `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="card-body">
+            <div class="card-title">${p.name}</div>
+            <div class="card-desc">${p.desc}</div>
+            <div class="card-footer">
+              <span class="price">$${p.price}</span>
+              <button class="btn-add" onclick="openCustomModal(${p.id})">
+                <i class="fas fa-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function openCustomModal(id) {
+      selectedProduct = [...dishes, ...drinks].find(p => p.id === id);
+      currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
+      document.getElementById('modal-item-title').innerText = selectedProduct.name;
+      document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
+      document.getElementById('custom-notes').value = '';
+
+      document.getElementById('dish-options').style.display = selectedProduct.isDrink ? 'none' : 'block';
+      document.getElementById('custom-modal').style.display = 'flex';
+    }
+
+    function changeQty(delta) {
+      currentQty += delta;
+      if (currentQty < 1) currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
+    }
+
+    function closeCustomModal() {
+      document.getElementById('custom-modal').style.display = 'none';
+    }
+
+    function confirmAddToCart() {
+      const term = selectedProduct.isDrink ? 'Bebida' : document.querySelector('input[name="term"]:checked').value;
+      const sauce = selectedProduct.isDrink ? 'N/A' : document.getElementById('select-sauce').value;
+      const notes = document.getElementById('custom-notes').value;
+
+      const itemDetail = {
+        ...selectedProduct,
+        cartId: Date.now(),
+        qty: currentQty,
+        term,
+        sauce,
+        notes
+      };
+
+      cart.push(itemDetail);
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'add_to_cart', {
+          item_name: selectedProduct.name,
+          value: selectedProduct.price * currentQty,
+          currency: 'MXN'
+        });
+      }
+
+      closeCustomModal();
+      updateTotal();
+    }
+
+    function removeFromCart(cartId) {
+      cart = cart.filter(item => item.cartId !== cartId);
+      updateTotal();
+      renderCartList();
+    }
+
+    function handleDeliveryChange() {
+      const zoneData = document.getElementById('delivery-zone').value.split('|');
+      const deliveryCost = parseInt(zoneData[0]);
+      const addressGroup = document.getElementById('address-group');
+
+      if (deliveryCost === 0) {
+        addressGroup.style.display = 'none';
+      } else {
+        addressGroup.style.display = 'block';
+      }
+      updateTotal();
+    }
+
+    function updateTotal() {
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const deliveryVal = parseInt(document.getElementById('delivery-zone').value.split('|')[0] || 0);
+      const grandTotal = subtotal + deliveryVal;
+
+      const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+      document.getElementById('cart-count').innerText = totalItemsCount;
+      document.getElementById('cart-total').innerText = `$${subtotal}.00`;
+      document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
+    }
+
+    function renderCartList() {
+      const list = document.getElementById('cart-list');
+      if (cart.length === 0) {
+        list.innerHTML = '<p style="text-align:center; color: var(--text-muted);">El carrito está vacío</p>';
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div>
+            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
+            <div style="font-size:0.75rem; color: var(--text-muted);">
+              ${!item.isDrink ? item.term + ' | ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
+            </div>
+          </div>
+          <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:red;">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert("Agrega al menos un platillo o bebida al carrito.");
+        return;
+      }
+      renderCartList();
+      handleDeliveryChange();
+      document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').style.display = 'none';
+    }
+
+    function sendWhatsAppOrder() {
+      const name = document.getElementById('client-name').value.trim();
+      const paymentType = document.getElementById('payment-method').value;
+      const zoneData = document.getElementById('delivery-zone').value.split('|');
+      const deliveryCost = parseInt(zoneData[0]);
+      const zoneName = zoneData[1];
+      const address = document.getElementById('client-address').value.trim();
+
+      if (!name) {
+        alert("Por favor ingresa tu nombre.");
+        return;
+      }
+
+      if (deliveryCost > 0 && !address) {
+        alert("Por favor ingresa tu dirección para el envío a domicilio.");
+        return;
+      }
+
+      let subtotal = 0;
+      cart.forEach(item => subtotal += (item.price * item.qty));
+      const grandTotal = subtotal + deliveryCost;
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          currency: 'MXN',
+          value: grandTotal,
+          payment_type: paymentType,
+          delivery_zone: zoneName
+        });
+      }
+
+      let message = `*¡NUEVO PEDIDO - EL MEDIL DE ALI!* 🥘🍲\n\n`;
+      message += `*Cliente:* ${name}\n`;
+      message += `*Modalidad:* ${zoneName}\n`;
+      if (deliveryCost > 0) {
+        message += `*Dirección:* ${address}\n`;
+      }
+      message += `*Método de Pago:* ${paymentType}\n\n`;
+
+      message += `--- *DETALLE DEL PEDIDO* ---\n`;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.qty;
+        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
+        if(!item.isDrink) {
+          message += `   • Preparación: ${item.term}\n`;
+          message += `   • Complemento: ${item.sauce}\n`;
+        }
+        if (item.notes) message += `   • Nota: ${item.notes}\n`;
+      });
+
+      message += `\n---------------------------\n`;
+      message += `*Subtotal:* $${subtotal}.00 MXN\n`;
+      message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
+      message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
+
+      if (paymentType === 'Transferencia') {
+        message += `📌 *DATOS PARA TRANSFERENCIA:* \n`;
+        message += `• *Banco/Plataforma:* Mercado Pago (STP)\n`;
+        message += `• *CLABE:* 722969010658559464\n`;
+        message += `• *Titular:* Juan Alberto Jasso Chavez\n`;
+        message += `👉 *Por favor adjunta la captura del pago a este mensaje para comenzar la preparación.*\n`;
+      } else if (paymentType === 'Efectivo') {
+        message += `📌 *NOTA PAGO EN EFECTIVO:* \n`;
+        message += `👉 Por favor ten la cantidad exacta o indícanos aquí si requieres cambio de qué billete.\n`;
+      } else if (paymentType === 'Tarjeta') {
+        message += `📌 *NOTA PAGO CON TARJETA:* \n`;
+        message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
+      }
+
+      const phone = "527792179612";
+      const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+      sessionStorage.setItem('wa_url', encodedUrl);
+
+      // Redirecciona a la página de gracias (sube de nivel a la carpeta principal)
+      window.location.href = "../gracias.html";
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
