@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sabor & Fuego - Menú Digital</title>
+  <title>Sabor & Fuego - Cocina Urbana</title>
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5MXSF5M7S"></script>
@@ -18,13 +18,13 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --primary: #e63946;
-      --secondary: #1d3557;
-      --bg-light: #f8f9fa;
-      --card-bg: #ffffff;
-      --text-dark: #212529;
-      --text-muted: #6c757d;
-      --accent: #2a9d8f;
+      --primary: #d62828;
+      --secondary: #f77f00;
+      --bg-dark: #121212;
+      --card-bg: #1e1e1e;
+      --text-light: #f8f9fa;
+      --text-muted: #adb5bd;
+      --accent: #fcbf49;
     }
 
     * {
@@ -35,40 +35,63 @@
     }
 
     body {
-      background-color: var(--bg-light);
-      color: var(--text-dark);
+      background-color: var(--bg-dark);
+      color: var(--text-light);
       padding-bottom: 90px;
     }
 
     header {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80') center/cover;
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80') center/cover;
       color: white;
       text-align: center;
-      padding: 45px 20px 30px;
+      padding: 35px 20px 25px;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .logo-container {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--accent);
+      box-shadow: 0 4px 15px rgba(214, 40, 40, 0.4);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     header h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       font-weight: 800;
       margin-bottom: 5px;
+      color: var(--accent);
     }
 
     header p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       opacity: 0.9;
+      color: #e5e5e5;
     }
 
     .badge-delivery {
       display: inline-block;
       background-color: var(--primary);
       color: white;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 20px;
       font-size: 0.8rem;
       font-weight: bold;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .container {
@@ -78,14 +101,14 @@
     }
 
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       font-weight: 800;
-      color: var(--secondary);
-      margin: 25px 0 15px;
+      color: var(--accent);
+      margin: 30px 0 15px;
       display: flex;
       align-items: center;
       gap: 10px;
-      border-bottom: 2px solid #e0e0e0;
+      border-bottom: 2px solid #333;
       padding-bottom: 8px;
     }
 
@@ -99,7 +122,8 @@
       background: var(--card-bg);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: 1px solid #333;
       transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
@@ -107,7 +131,8 @@
 
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 16px rgba(247, 127, 0, 0.2);
+      border-color: var(--secondary);
     }
 
     .card img {
@@ -127,6 +152,7 @@
       font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 6px;
+      color: white;
     }
 
     .card-desc {
@@ -146,7 +172,7 @@
     .price {
       font-size: 1.2rem;
       font-weight: 800;
-      color: var(--secondary);
+      color: var(--accent);
     }
 
     .btn-add {
@@ -164,7 +190,7 @@
     }
 
     .btn-add:hover {
-      background-color: #d62839;
+      background-color: #b01e1e;
     }
 
     .cart-bar {
@@ -172,8 +198,9 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: white;
-      box-shadow: 0 -4px 15px rgba(0,0,0,0.12);
+      background: #181818;
+      border-top: 1px solid #333;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
       padding: 12px 20px;
       display: flex;
       justify-content: space-between;
@@ -189,8 +216,8 @@
 
     .cart-icon-wrap {
       position: relative;
-      background: var(--secondary);
-      color: white;
+      background: var(--accent);
+      color: #000;
       width: 45px;
       height: 45px;
       border-radius: 50%;
@@ -198,6 +225,7 @@
       align-items: center;
       justify-content: center;
       font-size: 1.2rem;
+      font-weight: bold;
     }
 
     .cart-count {
@@ -219,6 +247,7 @@
     .cart-total {
       font-size: 1.1rem;
       font-weight: 800;
+      color: var(--accent);
     }
 
     .btn-checkout {
@@ -238,7 +267,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.7);
       z-index: 200;
       justify-content: center;
       align-items: center;
@@ -246,7 +275,8 @@
     }
 
     .modal-content {
-      background: white;
+      background: #222;
+      color: white;
       width: 100%;
       max-width: 480px;
       border-radius: 12px;
@@ -254,6 +284,7 @@
       overflow-y: auto;
       padding: 20px;
       position: relative;
+      border: 1px solid #444;
     }
 
     .close-modal {
@@ -261,7 +292,7 @@
       top: 15px; right: 15px;
       font-size: 1.3rem;
       cursor: pointer;
-      color: var(--text-muted);
+      color: #aaa;
     }
 
     .form-group {
@@ -273,12 +304,15 @@
       font-weight: 600;
       font-size: 0.85rem;
       margin-bottom: 4px;
+      color: #ddd;
     }
 
     .form-group input, .form-group select, .form-group textarea {
       width: 100%;
       padding: 8px 10px;
-      border: 1px solid #ccc;
+      border: 1px solid #444;
+      background: #111;
+      color: white;
       border-radius: 6px;
       font-size: 0.9rem;
     }
@@ -294,8 +328,9 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      border: 1px solid #ccc;
-      background: #f0f0f0;
+      border: 1px solid #555;
+      background: #333;
+      color: white;
       font-size: 1.1rem;
       font-weight: bold;
       cursor: pointer;
@@ -315,7 +350,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #333;
       padding: 8px 0;
     }
 
@@ -323,8 +358,9 @@
       width: 24px;
       height: 24px;
       border-radius: 4px;
-      border: 1px solid #ccc;
-      background: #f0f0f0;
+      border: 1px solid #555;
+      background: #333;
+      color: white;
       cursor: pointer;
       font-weight: bold;
     }
@@ -333,30 +369,26 @@
       font-weight: bold;
       font-size: 0.9rem;
       margin: 10px 0 5px;
-    }
-
-    .radio-group label {
-      display: block;
-      font-weight: normal;
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-      cursor: pointer;
+      color: var(--accent);
     }
   </style>
 </head>
 <body>
 
   <header>
+    <div class="logo-container">
+      <img src="img/logo.png" alt="Sabor & Fuego Logo" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=300&q=80'">
+    </div>
     <h1>Sabor & Fuego</h1>
-    <p>Cocina Urbana • Sabor Artesanal a Domicilio</p>
-    <span class="badge-delivery"><i class="fas fa-motorcycle"></i> Pedidos para Llevar / Servicio a Domicilio</span>
+    <p>Cocina Urbana • Cortes & Especialidades</p>
+    <span class="badge-delivery"><i class="fas fa-motorcycle"></i> Envíos a Domicilio & Pedidos directos</span>
   </header>
 
   <div class="container">
-    <div class="section-title"><i class="fas fa-utensils"></i> Platillos Principales</div>
+    <div class="section-title"><i class="fas fa-fire"></i> Platillos de la Casa</div>
     <div class="menu-grid" id="dishes-grid"></div>
 
-    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Refrescos</div>
+    <div class="section-title"><i class="fas fa-glass-cheers"></i> Vitroleros de Agua & Bebidas</div>
     <div class="menu-grid" id="drinks-grid"></div>
   </div>
 
@@ -376,12 +408,12 @@
     </button>
   </div>
 
-  <!-- Modal de Personalización -->
+  <!-- Modal de Personalización Dinámico -->
   <div class="modal" id="custom-modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeCustomModal()">&times;</span>
-      <h3 id="modal-item-title" style="margin-bottom: 5px;">Personalizar</h3>
-      <p id="modal-item-price" style="color: var(--secondary); font-weight: bold; margin-bottom: 10px;"></p>
+      <h3 id="modal-item-title" style="margin-bottom: 5px; color: var(--accent);">Personalizar</h3>
+      <p id="modal-item-price" style="color: var(--accent); font-weight: bold; margin-bottom: 10px;"></p>
 
       <div class="qty-picker">
         <span class="opt-title" style="margin:0;">Cantidad:</span>
@@ -390,30 +422,42 @@
         <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
       </div>
 
+      <!-- Opciones para Platillos de Comida -->
       <div id="dish-options">
         <div class="form-group">
-          <label class="opt-title">Término / Especificación:</label>
-          <div class="radio-group">
-            <label><input type="radio" name="term" value="Bien cocido / Estándar" checked> Bien cocido / Estándar</label>
-            <label><input type="radio" name="term" value="Término medio"> Término medio</label>
-            <label><input type="radio" name="term" value="Salsa aparte"> Salsa aparte</label>
-          </div>
+          <label class="opt-title">Término de la carne / Preparación:</label>
+          <select id="select-term">
+            <option value="Término Medio">Término Medio</option>
+            <option value="Bien Cocido">Bien Cocido</option>
+            <option value="Tres Cuartos">Tres Cuartos</option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label class="opt-title">Salsa o Aderezo Favorito:</label>
+          <label class="opt-title">Salsa o Guarnición:</label>
           <select id="select-sauce">
-            <option value="Salsa Verde de la Casa">Salsa Verde de la Casa</option>
-            <option value="Salsa Macha con Arándano">Salsa Macha con Arándano</option>
-            <option value="Aderezo Chipotle / BBQ">Aderezo Chipotle / BBQ</option>
-            <option value="Sin Salsa / Sin Aderezo">Sin Salsa / Sin Aderezo</option>
+            <option value="Salsa de la Casa">Salsa de la Casa</option>
+            <option value="Salsa BBQ Ahumada">Salsa BBQ Ahumada</option>
+            <option value="Salsa Picante Especial">Salsa Picante Especial</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Vitroleros de Agua / Bebidas -->
+      <div id="drink-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona el Sabor del Agua:</label>
+          <select id="select-flavor">
+            <option value="Horchata Tradicional">Horchata Tradicional</option>
+            <option value="Jamaica Natural">Jamaica Natural</option>
+            <option value="Tamarindo">Tamarindo</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <label class="opt-title">Instrucciones Especiales:</label>
-        <input type="text" id="custom-notes" placeholder="Ej. Bien fría, sin cebolla, etc.">
+        <input type="text" id="custom-notes" placeholder="Ej. Con mucho hielo, sin cebolla, etc.">
       </div>
 
       <button class="btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;" onclick="confirmAddToCart()">
@@ -426,42 +470,41 @@
   <div class="modal" id="checkout-modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
-      <h3 style="margin-bottom: 15px;">Resumen de tu Pedido</h3>
+      <h3 style="margin-bottom: 15px; color: var(--accent);">Resumen de tu Pedido</h3>
       
       <div id="cart-list" style="margin-bottom: 15px;"></div>
 
-      <hr style="margin: 10px 0; border: none; border-top: 1px solid #eee;">
+      <hr style="margin: 10px 0; border: none; border-top: 1px solid #444;">
 
       <div class="form-group">
-        <label>Tipo de Entrega / Zona:</label>
+        <label>Tipo de Servicio / Entrega:</label>
         <select id="delivery-zone" onchange="handleDeliveryChange()">
           <option value="0|Pasar a recoger al local (Sin costo)">Pasar a recoger al local - $0</option>
-          <option value="25|Zona Centro / Tizayuca Cercano">Zona Centro / Cercana - $25</option>
-          <option value="35|Zona Norte / Sur (Hidalgo)">Zona Norte / Sur - $35</option>
-          <option value="45|Fraccionamientos Distantes">Fraccionamientos Distantes - $45</option>
+          <option value="25|Servicio a Domicilio Zona Local">Servicio a Domicilio Zona Local - $25</option>
+          <option value="40|Servicio a Domicilio Zona Extendida">Servicio a Domicilio Zona Extendida - $40</option>
         </select>
       </div>
 
       <div class="form-group">
         <label>Nombre del Cliente:</label>
-        <input type="text" id="client-name" placeholder="Ej. Alberto Jasso">
+        <input type="text" id="client-name" placeholder="Ej. Juan Jasso">
       </div>
 
       <div class="form-group" id="address-group" style="display: none;">
         <label>Dirección de Entrega / Referencia:</label>
-        <input type="text" id="client-address" placeholder="Ej. Av. Principal #123, Col. Centro">
+        <input type="text" id="client-address" placeholder="Ej. Av. Principal #123">
       </div>
 
       <div class="form-group">
         <label>Método de Pago:</label>
         <select id="payment-method">
           <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
-          <option value="Transferencia">Transferencia Bancaria (STP / Mercado Pago)</option>
-          <option value="Tarjeta">Tarjeta de Débito / Crédito (Terminal física)</option>
+          <option value="Transferencia">Transferencia Bancaria</option>
+          <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
         </select>
       </div>
 
-      <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0;" id="final-total">
+      <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0; color: var(--accent);" id="final-total">
         Total: $0.00
       </div>
 
@@ -473,23 +516,12 @@
 
   <script>
     const dishes = [
-      { id: 1, name: "Hamburguesa Sabor & Fuego", price: 135, desc: "Carne sirloin 180g, queso cheddar fundido, tocino crujiente y aderezo especial.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 2, name: "Pizza Artesanal Pepperoni", price: 175, desc: "Masa madre de fermentación lenta, salsa pomodoro, mozzarella y abundante pepperoni.", img: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 3, name: "Tacos de Sirloin (4 pzs)", price: 140, desc: "Corte sirloin a la parrilla sobre tortilla de maíz recién hecha, guacamole y cebolla asada.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 4, name: "Alitas BBQ / Búfalo (10 pzs)", price: 160, desc: "Crujientes alitas bañadas en tu salsa favorita, acompañadas de bastones de apio y zanahoria.", img: "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 5, name: "Boneless Crujientes (300g)", price: 155, desc: "Pechuga de pollo empanizada al momento con papas a la francesa y aderezo ranch.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 6, name: "Club Sándwich Tradicional", price: 120, desc: "Pollo a la plancha, jamón, queso, tocino, jitomate y lechuga en pan artesanal con papas.", img: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 7, name: "Burrito Gigante de Pastor", price: 130, desc: "Tortilla de harina de 30cm, carne al pastor, queso fundido, frijoles refritos y piña.", img: "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 8, name: "Ensalada César con Pollo", price: 110, desc: "Pechuga a la parrilla, mezcla de lechugas, crutones horneados, parmesano y aderezo César.", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 9, name: "Papas Preparadas con Bacon", price: 90, desc: "Papas fritas sazonadas, bañadas en salsa de queso cheddar, bits de tocino y cebollín.", img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 10, name: "Costillas BBQ (Media Orden)", price: 180, desc: "Costillas de cerdo horneadas lentamente, bañadas en BBQ ahumada con elote amarillo.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false }
+      { id: 1, name: "Corte de Carne a la Parrilla", price: 190, desc: "Acompañado de papas gajo, ensalada fresca y tortillas calientes.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false },
+      { id: 2, name: "Hamburguesa Urbana Sabor & Fuego", price: 140, desc: "Carne de res premium, queso cheddar fundido, tocino crujiente y papas.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80", isDrink: false }
     ];
 
     const drinks = [
-      { id: 101, name: "Refresco de Lata 355ml", price: 35, desc: "Coca-Cola, Coca Zero, Sprite, Mundet o Fanta (Frío).", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", isDrink: true },
-      { id: 102, name: "Agua de Sabor Natural (1 Litro)", price: 45, desc: "Horchata, Horchata con Fresa, Jamaica o Limón con Chía.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true },
-      { id: 103, name: "Cerveza Nacional 355ml", price: 45, desc: "Corona Extra, Victoria o Modelo Especial bien fría.", img: "https://images.unsplash.com/photo-1608270586620-248524c67de9?auto=format&fit=crop&w=500&q=80", isDrink: true },
-      { id: 104, name: "Limonada / Naranjada Mineral", price: 40, desc: "Preparada al momento con fruta natural y agua mineral.", img: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?auto=format&fit=crop&w=500&q=80", isDrink: true }
+      { id: 101, name: "Vitrolero de Agua Fresca (1 Litro)", price: 45, desc: "Agua natural en vitrolero con hielo. Elige entre Horchata, Jamaica o Tamarindo.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true }
     ];
 
     let cart = [];
@@ -527,7 +559,14 @@
       document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
-      document.getElementById('dish-options').style.display = selectedProduct.isDrink ? 'none' : 'block';
+      if (selectedProduct.isDrink) {
+        document.getElementById('dish-options').style.display = 'none';
+        document.getElementById('drink-options').style.display = 'block';
+      } else {
+        document.getElementById('dish-options').style.display = 'block';
+        document.getElementById('drink-options').style.display = 'none';
+      }
+
       document.getElementById('custom-modal').style.display = 'flex';
     }
 
@@ -542,16 +581,24 @@
     }
 
     function confirmAddToCart() {
-      const term = selectedProduct.isDrink ? 'Bebida' : document.querySelector('input[name="term"]:checked').value;
-      const sauce = selectedProduct.isDrink ? 'N/A' : document.getElementById('select-sauce').value;
+      let detail1 = '';
+      let detail2 = '';
+
+      if (selectedProduct.isDrink) {
+        detail1 = document.getElementById('select-flavor').value;
+      } else {
+        detail1 = document.getElementById('select-term').value;
+        detail2 = document.getElementById('select-sauce').value;
+      }
+
       const notes = document.getElementById('custom-notes').value;
 
       const itemDetail = {
         ...selectedProduct,
         cartId: Date.now(),
         qty: currentQty,
-        term,
-        sauce,
+        detail1,
+        detail2,
         notes
       };
 
@@ -603,19 +650,19 @@
     function renderCartList() {
       const list = document.getElementById('cart-list');
       if (cart.length === 0) {
-        list.innerHTML = '<p style="text-align:center; color: var(--text-muted);">El carrito está vacío</p>';
+        list.innerHTML = '<p style="text-align:center; color: #888;">El carrito está vacío</p>';
         return;
       }
 
       list.innerHTML = cart.map(item => `
         <div class="cart-item">
           <div>
-            <strong style="font-size:0.95rem;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
-            <div style="font-size:0.75rem; color: var(--text-muted);">
-              ${!item.isDrink ? item.term + ' | ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
+            <strong style="font-size:0.95rem; color: #fff;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
+            <div style="font-size:0.75rem; color: #aaa;">
+              ${item.isDrink ? 'Sabor: ' + item.detail1 : item.detail1 + ' | ' + item.detail2} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
-          <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:red;">&times;</button>
+          <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:#ff6b6b;">&times;</button>
         </div>
       `).join('');
     }
@@ -665,7 +712,7 @@
         });
       }
 
-      let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍔🍕🥤\n\n`;
+      let message = `*¡NUEVO PEDIDO - SABOR & FUEGO!* 🍖🔥\n\n`;
       message += `*Cliente:* ${name}\n`;
       message += `*Modalidad:* ${zoneName}\n`;
       if (deliveryCost > 0) {
@@ -678,9 +725,11 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
-        if(!item.isDrink) {
-          message += `   • Especificación: ${item.term}\n`;
-          message += `   • Salsa: ${item.sauce}\n`;
+        if(item.isDrink) {
+          message += `   • Sabor elegido: ${item.detail1}\n`;
+        } else {
+          message += `   • Término: ${item.detail1}\n`;
+          message += `   • Salsa/Guarnición: ${item.detail2}\n`;
         }
         if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
@@ -690,28 +739,11 @@
       message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
       message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
 
-      if (paymentType === 'Transferencia') {
-        message += `📌 *DATOS PARA TRANSFERENCIA:* \n`;
-        message += `• *Banco/Plataforma:* Mercado Pago (STP)\n`;
-        message += `• *CLABE:* 722969010658559464\n`;
-        message += `• *Titular:* Juan Alberto Jasso Chavez\n`;
-        message += `👉 *Por favor adjunta la captura del pago a este mensaje para comenzar la preparación.*\n`;
-      } else if (paymentType === 'Efectivo') {
-        message += `📌 *NOTA PAGO EN EFECTIVO:* \n`;
-        message += `👉 Por favor ten la cantidad exacta o indícanos aquí si requieres cambio de qué billete.\n`;
-      } else if (paymentType === 'Tarjeta') {
-        message += `📌 *NOTA PAGO CON TARJETA:* \n`;
-        message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
-      }
-
-      const phone = "527792179612";
+      const phone = "527717011984";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-      // Guarda la URL codificada en el almacenamiento de la sesión
-      sessionStorage.setItem('wa_url', encodedUrl);
-
-      // Redirecciona directamente a la página de gracias
-      window.location.href = "gracias.html";
+      window.open(encodedUrl, '_blank');
+      closeCheckoutModal();
     }
 
     renderMenu();
