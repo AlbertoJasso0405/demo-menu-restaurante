@@ -416,7 +416,7 @@
       <p id="modal-item-price" style="color: var(--accent); font-weight: bold; margin-bottom: 10px;"></p>
 
       <div class="qty-picker">
-        <span class="opt-title" style="margin:0;">Cantidad:</span>
+        <span class="opt-title" style="margin:0; color:#fff;">Cantidad:</span>
         <button class="btn-qty-mod" onclick="changeQty(-1)">-</button>
         <span class="qty-number" id="modal-qty">1</span>
         <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
@@ -443,11 +443,11 @@
         </div>
       </div>
 
-      <!-- Opciones para Vitroleros de Agua / Bebidas -->
-      <div id="drink-options" style="display: none;">
+      <!-- Opciones para Vitroleros de Agua -->
+      <div id="water-options" style="display: none;">
         <div class="form-group">
           <label class="opt-title">Selecciona el Sabor del Agua:</label>
-          <select id="select-flavor">
+          <select id="select-water-flavor">
             <option value="Horchata Tradicional">Horchata Tradicional</option>
             <option value="Jamaica Natural">Jamaica Natural</option>
             <option value="Tamarindo">Tamarindo</option>
@@ -455,9 +455,35 @@
         </div>
       </div>
 
+      <!-- Opciones para Refrescos -->
+      <div id="soda-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona tu Refresco:</label>
+          <select id="select-soda-flavor">
+            <option value="Coca Cola">Coca Cola</option>
+            <option value="Coca Cero">Coca Cero</option>
+            <option value="Sprite">Sprite</option>
+            <option value="Delaware Punch">Delaware Punch</option>
+            <option value="Manzana">Manzana</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Cervezas -->
+      <div id="beer-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona tu Cerveza:</label>
+          <select id="select-beer-brand">
+            <option value="Corona Extra">Corona Extra</option>
+            <option value="Modelo Especial">Modelo Especial</option>
+            <option value="Victoria">Victoria</option>
+          </select>
+        </div>
+      </div>
+
       <div class="form-group">
         <label class="opt-title">Instrucciones Especiales:</label>
-        <input type="text" id="custom-notes" placeholder="Ej. Con mucho hielo, sin cebolla, etc.">
+        <input type="text" id="custom-notes" placeholder="Ej. Con hielo, sin cebolla, etc.">
       </div>
 
       <button class="btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;" onclick="confirmAddToCart()">
@@ -516,12 +542,16 @@
 
   <script>
     const dishes = [
-      { id: 1, name: "Corte de Carne a la Parrilla", price: 190, desc: "Acompañado de papas gajo, ensalada fresca y tortillas calientes.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 2, name: "Hamburguesa Urbana Sabor & Fuego", price: 140, desc: "Carne de res premium, queso cheddar fundido, tocino crujiente y papas.", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80", isDrink: false }
+      { id: 1, name: "Asado Mixto o Argentino (Porción)", price: 180, desc: "Cortes finos a la parrilla, chorizo, acompañados de guarnición, limones y tortillas.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 2, name: "Orden de Tacos Especiales (5 pzs)", price: 110, desc: "Servidos con su verdura, limones, salsa de la casa y tortillas recién hechas.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 3, name: "Pozole Tradicional Estilo Ali", price: 130, desc: "Platillo pozolero bien servido con carne, lechuga, rábanos, tostadas y salsa.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 4, name: "Taquiza para Eventos (Paquete Base)", price: 1200, desc: "Ideal para reuniones, fiestas y cumpleaños. Incluye limones, salsas, guacamole, tortillas y desechables.", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80", type: "dish" }
     ];
 
     const drinks = [
-      { id: 101, name: "Vitrolero de Agua Fresca (1 Litro)", price: 45, desc: "Agua natural en vitrolero con hielo. Elige entre Horchata, Jamaica o Tamarindo.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true }
+      { id: 101, name: "Vitrolero de Agua Fresca (1 Litro)", price: 45, desc: "Agua natural fresca. Elige entre Horchata, Jamaica o Tamarindo.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
+      { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite, Delaware Punch o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" },
+      { id: 103, name: "Cerveza Bien Fría", price: 45, desc: "Elige tu marca favorita: Corona Extra, Modelo Especial o Victoria.", img: "https://images.unsplash.com/photo-1608270102553-9e913a3d537f?auto=format&fit=crop&w=500&q=80", type: "beer" }
     ];
 
     let cart = [];
@@ -559,12 +589,21 @@
       document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
-      if (selectedProduct.isDrink) {
-        document.getElementById('dish-options').style.display = 'none';
-        document.getElementById('drink-options').style.display = 'block';
-      } else {
+      // Ocultar todas las secciones del modal primero
+      document.getElementById('dish-options').style.display = 'none';
+      document.getElementById('water-options').style.display = 'none';
+      document.getElementById('soda-options').style.display = 'none';
+      document.getElementById('beer-options').style.display = 'none';
+
+      // Mostrar la sección correspondiente según el tipo de producto
+      if (selectedProduct.type === 'dish') {
         document.getElementById('dish-options').style.display = 'block';
-        document.getElementById('drink-options').style.display = 'none';
+      } else if (selectedProduct.type === 'water') {
+        document.getElementById('water-options').style.display = 'block';
+      } else if (selectedProduct.type === 'soda') {
+        document.getElementById('soda-options').style.display = 'block';
+      } else if (selectedProduct.type === 'beer') {
+        document.getElementById('beer-options').style.display = 'block';
       }
 
       document.getElementById('custom-modal').style.display = 'flex';
@@ -584,11 +623,15 @@
       let detail1 = '';
       let detail2 = '';
 
-      if (selectedProduct.isDrink) {
-        detail1 = document.getElementById('select-flavor').value;
-      } else {
+      if (selectedProduct.type === 'dish') {
         detail1 = document.getElementById('select-term').value;
         detail2 = document.getElementById('select-sauce').value;
+      } else if (selectedProduct.type === 'water') {
+        detail1 = 'Sabor: ' + document.getElementById('select-water-flavor').value;
+      } else if (selectedProduct.type === 'soda') {
+        detail1 = 'Refresco: ' + document.getElementById('select-soda-flavor').value;
+      } else if (selectedProduct.type === 'beer') {
+        detail1 = 'Cerveza: ' + document.getElementById('select-beer-brand').value;
       }
 
       const notes = document.getElementById('custom-notes').value;
@@ -659,7 +702,7 @@
           <div>
             <strong style="font-size:0.95rem; color: #fff;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
             <div style="font-size:0.75rem; color: #aaa;">
-              ${item.isDrink ? 'Sabor: ' + item.detail1 : item.detail1 + ' | ' + item.detail2} ${item.notes ? '| Nota: ' + item.notes : ''}
+              ${item.type === 'dish' ? item.detail1 + ' | ' + item.detail2 : item.detail1} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
           <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:#ff6b6b;">&times;</button>
@@ -725,11 +768,11 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
-        if(item.isDrink) {
-          message += `   • Sabor elegido: ${item.detail1}\n`;
-        } else {
+        if(item.type === 'dish') {
           message += `   • Término: ${item.detail1}\n`;
           message += `   • Salsa/Guarnición: ${item.detail2}\n`;
+        } else {
+          message += `   • Opción: ${item.detail1}\n`;
         }
         if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
