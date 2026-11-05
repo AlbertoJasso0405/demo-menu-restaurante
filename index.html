@@ -544,14 +544,14 @@
     const dishes = [
       { id: 1, name: "Asado Mixto o Argentino (Porción)", price: 180, desc: "Cortes finos a la parrilla, chorizo, acompañados de guarnición, limones y tortillas.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", type: "dish" },
       { id: 2, name: "Orden de Tacos Especiales (5 pzs)", price: 110, desc: "Servidos con su verdura, limones, salsa de la casa y tortillas recién hechas.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", type: "dish" },
-      { id: 3, name: "Pozole Tradicional Estilo Ali", price: 130, desc: "Platillo pozolero bien servido con carne, lechuga, rábanos, tostadas y salsa.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 3, name: "Pozole Tradicional", price: 130, desc: "Platillo pozolero bien servido con carne, lechuga, rábanos, tostadas y salsa.", img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=500&q=80", type: "dish" },
       { id: 4, name: "Taquiza para Eventos (Paquete Base)", price: 1200, desc: "Ideal para reuniones, fiestas y cumpleaños. Incluye limones, salsas, guacamole, tortillas y desechables.", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80", type: "dish" }
     ];
 
     const drinks = [
       { id: 101, name: "Vitrolero de Agua Fresca (1 Litro)", price: 45, desc: "Agua natural fresca. Elige entre Horchata, Jamaica o Tamarindo.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
       { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite, Delaware Punch o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" },
-      { id: 103, name: "Cerveza Bien Fría", price: 45, desc: "Elige tu marca favorita: Corona Extra, Modelo Especial o Victoria.", img: "https://images.unsplash.com/photo-1608270102553-9e913a3d537f?auto=format&fit=crop&w=500&q=80", type: "beer" }
+      { id: 103, name: "Cerveza Bien Fría", price: 45, desc: "Elige tu marca favorita: Corona Extra, Modelo Especial o Victoria.", img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=500&q=80", type: "beer" }
     ];
 
     let cart = [];
@@ -589,13 +589,11 @@
       document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
-      // Ocultar todas las secciones del modal primero
       document.getElementById('dish-options').style.display = 'none';
       document.getElementById('water-options').style.display = 'none';
       document.getElementById('soda-options').style.display = 'none';
       document.getElementById('beer-options').style.display = 'none';
 
-      // Mostrar la sección correspondiente según el tipo de producto
       if (selectedProduct.type === 'dish') {
         document.getElementById('dish-options').style.display = 'block';
       } else if (selectedProduct.type === 'water') {
