@@ -817,7 +817,7 @@
       message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
       message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
 
-      const phone = "527792199612";
+      const phone = "527792179612"; // Número corregido
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
       window.open(encodedUrl, '_blank');
