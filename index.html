@@ -317,6 +317,16 @@
       font-size: 0.9rem;
     }
 
+    .bank-info-box {
+      background: #181818;
+      border: 1px dashed var(--accent);
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+
     .qty-picker {
       display: flex;
       align-items: center;
@@ -523,11 +533,22 @@
 
       <div class="form-group">
         <label>Método de Pago:</label>
-        <select id="payment-method">
+        <select id="payment-method" onchange="handlePaymentChange()">
           <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
           <option value="Transferencia">Transferencia Bancaria</option>
           <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
         </select>
+      </div>
+
+      <!-- Datos Bancarios condicionales para Transferencia -->
+      <div class="form-group" id="bank-info-group" style="display: none;">
+        <div class="bank-info-box">
+          <strong>🏦 Datos para Transferencia:</strong><br>
+          Banco: BBVA / Bancomer<br>
+          Clabe: <code>1234 5678 9012 3456 78</code><br>
+          Titular: Sabor & Fuego<br>
+          <em>* Favor de adjuntar su comprobante por este medio al enviar su pedido.</em>
+        </div>
       </div>
 
       <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0; color: var(--accent);" id="final-total">
@@ -676,6 +697,17 @@
       updateTotal();
     }
 
+    function handlePaymentChange() {
+      const paymentMethod = document.getElementById('payment-method').value;
+      const bankInfoGroup = document.getElementById('bank-info-group');
+
+      if (paymentMethod === 'Transferencia') {
+        bankInfoGroup.style.display = 'block';
+      } else {
+        bankInfoGroup.style.display = 'none';
+      }
+    }
+
     function updateTotal() {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
       const deliveryVal = parseInt(document.getElementById('delivery-zone').value.split('|')[0] || 0);
@@ -715,6 +747,7 @@
       }
       renderCartList();
       handleDeliveryChange();
+      handlePaymentChange();
       document.getElementById('checkout-modal').style.display = 'flex';
     }
 
@@ -759,7 +792,11 @@
       if (deliveryCost > 0) {
         message += `*Dirección:* ${address}\n`;
       }
-      message += `*Método de Pago:* ${paymentType}\n\n`;
+      message += `*Método de Pago:* ${paymentType}\n`;
+      if (paymentType === 'Transferencia') {
+        message += `*(Adjunto comprobante de transferencia)*\n`;
+      }
+      message += `\n`;
 
       message += `--- *DETALLE DEL PEDIDO* ---\n`;
 
@@ -780,7 +817,7 @@
       message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
       message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
 
-      const phone = "527717011984";
+      const phone = "527792199612";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
       window.open(encodedUrl, '_blank');
