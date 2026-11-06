@@ -793,8 +793,13 @@
         message += `*Dirección:* ${address}\n`;
       }
       message += `*Método de Pago:* ${paymentType}\n`;
+
       if (paymentType === 'Transferencia') {
-        message += `*(Adjunto comprobante de transferencia)*\n`;
+        message += `\n🏦 *DATOS PARA TRANSFERENCIA:*\n`;
+        message += `• Banco: BBVA / Bancomer\n`;
+        message += `• CLABE: 1234 5678 9012 3456 78\n`;
+        message += `• Titular: Sabor & Fuego\n`;
+        message += `*(Favor de adjuntar su comprobante por este medio)*\n`;
       }
       message += `\n`;
 
@@ -817,7 +822,7 @@
       message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
       message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
 
-      const phone = "527792179612"; // Número corregido
+      const phone = "527792179612";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
       window.open(encodedUrl, '_blank');
