@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cocina Familiar Gotita</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5MXSF5M7S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-H5MXSF5M7S');
+  </script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2d6a4f;
+      --secondary: #52b788;
+      --bg-dark: #121212;
+      --card-bg: #1e1e1e;
+      --text-light: #f8f9fa;
+      --text-muted: #adb5bd;
+      --accent: #d8f3dc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      padding-bottom: 90px;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=1000&q=80') center/cover;
+      color: white;
+      text-align: center;
+      padding: 35px 20px 25px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .logo-container {
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid var(--secondary);
+      box-shadow: 0 4px 15px rgba(45, 106, 79, 0.4);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 5px;
+      color: var(--secondary);
+    }
+
+    header p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      color: #e5e5e5;
+    }
+
+    .badge-delivery {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--secondary);
+      margin: 30px 0 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 2px solid #333;
+      padding-bottom: 8px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: 1px solid #333;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(82, 183, 136, 0.2);
+      border-color: var(--secondary);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .btn-add {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s;
+    }
+
+    .btn-add:hover {
+      background-color: #1b4332;
+    }
+
+    .cart-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #181818;
+      border-top: 1px solid #333;
+      box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .cart-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-icon-wrap {
+      position: relative;
+      background: var(--secondary);
+      color: #000;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-total {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--secondary);
+    }
+
+    .btn-checkout {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .modal-content {
+      background: #222;
+      color: white;
+      width: 100%;
+      max-width: 480px;
+      border-radius: 12px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+      position: relative;
+      border: 1px solid #444;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 15px; right: 15px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #aaa;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+      color: #ddd;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #444;
+      background: #111;
+      color: white;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .bank-info-box {
+      background: #181818;
+      border: 1px dashed var(--secondary);
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+
+    .qty-picker {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .btn-qty-mod {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #555;
+      background: #333;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-number {
+      font-size: 1.2rem;
+      font-weight: bold;
+      width: 30px;
+      text-align: center;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+      padding: 8px 0;
+    }
+
+    .btn-qty {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid #555;
+      background: #333;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .opt-title {
+      font-weight: bold;
+      font-size: 0.9rem;
+      margin: 10px 0 5px;
+      color: var(--secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="img/logo.png" alt="Cocina Familiar Gotita Logo" onerror="this.src='https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=300&q=80'">
+    </div>
+    <h1>Cocina Familiar Gotita</h1>
+    <p>Hecho con amor, para ti y tu familia</p>
+    <span class="badge-delivery"><i class="fas fa-motorcycle"></i> Envíos a Domicilio & Pedidos directos</span>
+  </header>
+
+  <div class="container">
+    <div class="section-title"><i class="fas fa-utensils"></i> Platillos Principales & Guisados</div>
+    <div class="menu-grid" id="dishes-grid"></div>
+
+    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Refrescos</div>
+    <div class="menu-grid" id="drinks-grid"></div>
+  </div>
+
+  <div class="cart-bar">
+    <div class="cart-info">
+      <div class="cart-icon-wrap">
+        <i class="fas fa-shopping-bag"></i>
+        <div class="cart-count" id="cart-count">0</div>
+      </div>
+      <div>
+        <div style="font-size: 0.75rem; color: var(--text-muted);">Total estimado</div>
+        <div class="cart-total" id="cart-total">$0.00</div>
+      </div>
+    </div>
+    <button class="btn-checkout" onclick="openCheckoutModal()">
+       Ver Pedido
+    </button>
+  </div>
+
+  <!-- Modal de Personalización Dinámico -->
+  <div class="modal" id="custom-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeCustomModal()">&times;</span>
+      <h3 id="modal-item-title" style="margin-bottom: 5px; color: var(--secondary);">Personalizar</h3>
+      <p id="modal-item-price" style="color: var(--secondary); font-weight: bold; margin-bottom: 10px;"></p>
+
+      <div class="qty-picker">
+        <span class="opt-title" style="margin:0; color:#fff;">Cantidad:</span>
+        <button class="btn-qty-mod" onclick="changeQty(-1)">-</button>
+        <span class="qty-number" id="modal-qty">1</span>
+        <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
+      </div>
+
+      <!-- Opciones para Platillos de Comida -->
+      <div id="dish-options">
+        <div class="form-group">
+          <label class="opt-title">Guarnición o Acompañamiento:</label>
+          <select id="select-term">
+            <option value="Con Sopa Aguada y Arroz">Con Sopa Aguada y Arroz</option>
+            <option value="Solo Arroz">Solo Arroz</option>
+            <option value="Solo Sopa Aguada">Solo Sopa Aguada</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="opt-title">Complemento:</label>
+          <select id="select-sauce">
+            <option value="Con Frijoles y Tortillas">Con Frijoles y Tortillas</option>
+            <option value="Solo Tortillas">Solo Tortillas</option>
+            <option value="Sin Frijoles">Sin Frijoles</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Agua Fresca -->
+      <div id="water-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona el Sabor del Agua:</label>
+          <select id="select-water-flavor">
+            <option value="Agua de Piña Natural">Agua de Piña Natural</option>
+            <option value="Horchata">Horchata</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Tamarindo">Tamarindo</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Refrescos -->
+      <div id="soda-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona tu Refresco:</label>
+          <select id="select-soda-flavor">
+            <option value="Coca Cola">Coca Cola</option>
+            <option value="Coca Cero">Coca Cero</option>
+            <option value="Sprite">Sprite</option>
+            <option value="Delaware Punch">Delaware Punch</option>
+            <option value="Manzana">Manzana</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Cervezas -->
+      <div id="beer-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona tu Cerveza:</label>
+          <select id="select-beer-brand">
+            <option value="Corona Extra">Corona Extra</option>
+            <option value="Modelo Especial">Modelo Especial</option>
+            <option value="Victoria">Victoria</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="opt-title">Instrucciones Especiales:</label>
+        <input type="text" id="custom-notes" placeholder="Ej. Sin cebolla, extra salsa, etc.">
+      </div>
+
+      <button class="btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;" onclick="confirmAddToCart()">
+        Agregar al Carrito
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Checkout / Confirmación -->
+  <div class="modal" id="checkout-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+      <h3 style="margin-bottom: 15px; color: var(--secondary);">Resumen de tu Pedido</h3>
+      
+      <div id="cart-list" style="margin-bottom: 15px;"></div>
+
+      <hr style="margin: 10px 0; border: none; border-top: 1px solid #444;">
+
+      <div class="form-group">
+        <label>Tipo de Servicio / Entrega:</label>
+        <select id="delivery-zone" onchange="handleDeliveryChange()">
+          <option value="0|Pasar a recoger al local (Sin costo)">Pasar a recoger al local - $0</option>
+          <option value="25|Servicio a Domicilio Zona Local">Servicio a Domicilio Zona Local - $25</option>
+          <option value="40|Servicio a Domicilio Zona Extendida">Servicio a Domicilio Zona Extendida - $40</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Nombre del Cliente:</label>
+        <input type="text" id="client-name" placeholder="Ej. Doña Mary">
+      </div>
+
+      <div class="form-group" id="address-group" style="display: none;">
+        <label>Dirección de Entrega / Referencia:</label>
+        <input type="text" id="client-address" placeholder="Ej. Calle Juárez #123">
+      </div>
+
+      <div class="form-group">
+        <label>Método de Pago:</label>
+        <select id="payment-method" onchange="handlePaymentChange()">
+          <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
+          <option value="Transferencia">Transferencia Bancaria</option>
+          <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
+        </select>
+      </div>
+
+      <!-- Datos Bancarios condicionales para Transferencia -->
+      <div class="form-group" id="bank-info-group" style="display: none;">
+        <div class="bank-info-box">
+          <strong>🏦 Datos para Transferencia:</strong><br>
+          Banco: BBVA / Bancomer<br>
+          Clabe: <code>1234 5678 9012 3456 78</code><br>
+          Titular: Cocina Familiar Gotita<br>
+          <em>* Favor de adjuntar su comprobante por este medio al enviar su pedido.</em>
+        </div>
+      </div>
+
+      <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0; color: var(--secondary);" id="final-total">
+        Total: $0.00
+      </div>
+
+      <button class="btn-checkout" style="width: 100%; justify-content: center; padding: 12px;" onclick="sendWhatsAppOrder()">
+        <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Enviar Pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const dishes = [
+      { id: 1, name: "Pollo a la Naranja", price: 120, desc: "Servido con su porción de sopa aguada, arroz al cilindro, frijoles y tortillas hechas a mano.", img: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 2, name: "Carne de Puerco en Adobo", price: 125, desc: "Acompañado de sopa aguada, arroz, frijoles de la olla y tortillas calientes.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 3, name: "Pechuga Empanizada con Ensalada", price: 130, desc: "Incluye sopa aguada, arroz, ensalada fresca de la casa y tortillas.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 4, name: "Enchiladas Caseras (Orden)", price: 95, desc: "Bañadas en salsa especial de la casa, crema, queso fresco y cebolla.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 5, name: "Chilaquiles Verdes o Rojos", price: 90, desc: "Con pollo deshebrado, crema, queso y frijoles refritos de la casa.", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=500&q=80", type: "dish" }
+    ];
+
+    const drinks = [
+      { id: 101, name: "Agua Fresca de Piña Natural (1 Litro)", price: 40, desc: "Agua natural del día elaborada con fruta fresca.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
+      { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite, Delaware Punch o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" },
+      { id: 103, name: "Cerveza Bien Fría", price: 45, desc: "Elige tu marca favorita: Corona Extra, Modelo Especial o Victoria.", img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=500&q=80", type: "beer" }
+    ];
+
+    let cart = [];
+    let selectedProduct = null;
+    let currentQty = 1;
+
+    function renderMenu() {
+      document.getElementById('dishes-grid').innerHTML = dishes.map(p => createCardHTML(p)).join('');
+      document.getElementById('drinks-grid').innerHTML = drinks.map(p => createCardHTML(p)).join('');
+    }
+
+    function createCardHTML(p) {
+      return `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="card-body">
+            <div class="card-title">${p.name}</div>
+            <div class="card-desc">${p.desc}</div>
+            <div class="card-footer">
+              <span class="price">$${p.price}</span>
+              <button class="btn-add" onclick="openCustomModal(${p.id})">
+                <i class="fas fa-plus"></i> Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function openCustomModal(id) {
+      selectedProduct = [...dishes, ...drinks].find(p => p.id === id);
+      currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
+      document.getElementById('modal-item-title').innerText = selectedProduct.name;
+      document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
+      document.getElementById('custom-notes').value = '';
+
+      document.getElementById('dish-options').style.display = 'none';
+      document.getElementById('water-options').style.display = 'none';
+      document.getElementById('soda-options').style.display = 'none';
+      document.getElementById('beer-options').style.display = 'none';
+
+      if (selectedProduct.type === 'dish') {
+        document.getElementById('dish-options').style.display = 'block';
+      } else if (selectedProduct.type === 'water') {
+        document.getElementById('water-options').style.display = 'block';
+      } else if (selectedProduct.type === 'soda') {
+        document.getElementById('soda-options').style.display = 'block';
+      } else if (selectedProduct.type === 'beer') {
+        document.getElementById('beer-options').style.display = 'block';
+      }
+
+      document.getElementById('custom-modal').style.display = 'flex';
+    }
+
+    function changeQty(delta) {
+      currentQty += delta;
+      if (currentQty < 1) currentQty = 1;
+      document.getElementById('modal-qty').innerText = currentQty;
+    }
+
+    function closeCustomModal() {
+      document.getElementById('custom-modal').style.display = 'none';
+    }
+
+    function confirmAddToCart() {
+      let detail1 = '';
+      let detail2 = '';
+
+      if (selectedProduct.type === 'dish') {
+        detail1 = document.getElementById('select-term').value;
+        detail2 = document.getElementById('select-sauce').value;
+      } else if (selectedProduct.type === 'water') {
+        detail1 = 'Sabor: ' + document.getElementById('select-water-flavor').value;
+      } else if (selectedProduct.type === 'soda') {
+        detail1 = 'Refresco: ' + document.getElementById('select-soda-flavor').value;
+      } else if (selectedProduct.type === 'beer') {
+        detail1 = 'Cerveza: ' + document.getElementById('select-beer-brand').value;
+      }
+
+      const notes = document.getElementById('custom-notes').value;
+
+      const itemDetail = {
+        ...selectedProduct,
+        cartId: Date.now(),
+        qty: currentQty,
+        detail1,
+        detail2,
+        notes
+      };
+
+      cart.push(itemDetail);
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'add_to_cart', {
+          item_name: selectedProduct.name,
+          value: selectedProduct.price * currentQty,
+          currency: 'MXN'
+        });
+      }
+
+      closeCustomModal();
+      updateTotal();
+    }
+
+    function removeFromCart(cartId) {
+      cart = cart.filter(item => item.cartId !== cartId);
+      updateTotal();
+      renderCartList();
+    }
+
+    function handleDeliveryChange() {
+      const zoneData = document.getElementById('delivery-zone').value.split('|');
+      const deliveryCost = parseInt(zoneData[0]);
+      const addressGroup = document.getElementById('address-group');
+
+      if (deliveryCost === 0) {
+        addressGroup.style.display = 'none';
+      } else {
+        addressGroup.style.display = 'block';
+      }
+      updateTotal();
+    }
+
+    function handlePaymentChange() {
+      const paymentMethod = document.getElementById('payment-method').value;
+      const bankInfoGroup = document.getElementById('bank-info-group');
+
+      if (paymentMethod === 'Transferencia') {
+        bankInfoGroup.style.display = 'block';
+      } else {
+        bankInfoGroup.style.display = 'none';
+      }
+    }
+
+    function updateTotal() {
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const deliveryVal = parseInt(document.getElementById('delivery-zone').value.split('|')[0] || 0);
+      const grandTotal = subtotal + deliveryVal;
+
+      const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+
+      document.getElementById('cart-count').innerText = totalItemsCount;
+      document.getElementById('cart-total').innerText = `$${subtotal}.00`;
+      document.getElementById('final-total').innerText = `Total + Envío: $${grandTotal}.00 MXN`;
+    }
+
+    function renderCartList() {
+      const list = document.getElementById('cart-list');
+      if (cart.length === 0) {
+        list.innerHTML = '<p style="text-align:center; color: #888;">El carrito está vacío</p>';
+        return;
+      }
+
+      list.innerHTML = cart.map(item => `
+        <div class="cart-item">
+          <div>
+            <strong style="font-size:0.95rem; color: #fff;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
+            <div style="font-size:0.75rem; color: #aaa;">
+              ${item.type === 'dish' ? item.detail1 + ' | ' + item.detail2 : item.detail1} ${item.notes ? '| Nota: ' + item.notes : ''}
+            </div>
+          </div>
+          <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:#ff6b6b;">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        alert("Agrega al menos un platillo o bebida al carrito.");
+        return;
+      }
+      renderCartList();
+      handleDeliveryChange();
+      handlePaymentChange();
+      document.getElementById('checkout-modal').style.display = 'flex';
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').style.display = 'none';
+    }
+
+    function sendWhatsAppOrder() {
+      const name = document.getElementById('client-name').value.trim();
+      const paymentType = document.getElementById('payment-method').value;
+      const zoneData = document.getElementById('delivery-zone').value.split('|');
+      const deliveryCost = parseInt(zoneData[0]);
+      const zoneName = zoneData[1];
+      const address = document.getElementById('client-address').value.trim();
+
+      if (!name) {
+        alert("Por favor ingresa tu nombre.");
+        return;
+      }
+
+      if (deliveryCost > 0 && !address) {
+        alert("Por favor ingresa tu dirección para el envío a domicilio.");
+        return;
+      }
+
+      let subtotal = 0;
+      cart.forEach(item => subtotal += (item.price * item.qty));
+      const grandTotal = subtotal + deliveryCost;
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          currency: 'MXN',
+          value: grandTotal,
+          payment_type: paymentType,
+          delivery_zone: zoneName
+        });
+      }
+
+      let message = `*¡NUEVO PEDIDO - COCINA FAMILIAR GOTITA!* 🍲✨\n\n`;
+      message += `*Cliente:* ${name}\n`;
+      message += `*Modalidad:* ${zoneName}\n`;
+      if (deliveryCost > 0) {
+        message += `*Dirección:* ${address}\n`;
+      }
+      message += `*Método de Pago:* ${paymentType}\n`;
+
+      if (paymentType === 'Transferencia') {
+        message += `\n🏦 *DATOS PARA TRANSFERENCIA:*\n`;
+        message += `• Banco: BBVA / Bancomer\n`;
+        message += `• CLABE: 1234 5678 9012 3456 78\n`;
+        message += `• Titular: Cocina Familiar Gotita\n`;
+        message += `*(Favor de adjuntar su comprobante por este medio)*\n`;
+      }
+      message += `\n`;
+
+      message += `--- *DETALLE DEL PEDIDO* ---\n`;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.qty;
+        message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
+        if(item.type === 'dish') {
+          message += `   • Acompañamiento: ${item.detail1}\n`;
+          message += `   • Complemento: ${item.detail2}\n`;
+        } else {
+          message += `   • Opción: ${item.detail1}\n`;
+        }
+        if (item.notes) message += `   • Nota: ${item.notes}\n`;
+      });
+
+      message += `\n---------------------------\n`;
+      message += `*Subtotal:* $${subtotal}.00 MXN\n`;
+      message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
+      message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
+
+      const phone = "527792179612";
+      const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+      window.open(encodedUrl, '_blank');
+      closeCheckoutModal();
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
