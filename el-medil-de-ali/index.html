@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Mandil de Ali - Menú Digital</title>
+  <title>Cocina Familiar Gotita</title>
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-H5MXSF5M7S"></script>
@@ -18,13 +18,13 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     :root {
-      --primary: #f77f00;
-      --secondary: #d62828;
+      --primary: #2d6a4f;
+      --secondary: #52b788;
       --bg-dark: #121212;
       --card-bg: #1e1e1e;
       --text-light: #f8f9fa;
       --text-muted: #adb5bd;
-      --accent: #fcbf49;
+      --accent: #d8f3dc;
     }
 
     * {
@@ -41,23 +41,23 @@
     }
 
     header {
-      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1000&q=80') center/cover;
+      background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=1000&q=80') center/cover;
       color: white;
       text-align: center;
       padding: 35px 20px 25px;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
-      border-bottom: 3px solid var(--accent);
+      border-bottom: 3px solid var(--primary);
     }
 
     .logo-container {
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       margin: 0 auto 15px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid var(--accent);
-      box-shadow: 0 4px 15px rgba(252, 191, 73, 0.4);
+      border: 3px solid var(--secondary);
+      box-shadow: 0 4px 15px rgba(45, 106, 79, 0.4);
       background: #000;
       display: flex;
       align-items: center;
@@ -74,7 +74,7 @@
       font-size: 2rem;
       font-weight: 800;
       margin-bottom: 5px;
-      color: var(--accent);
+      color: var(--secondary);
     }
 
     header p {
@@ -103,7 +103,7 @@
     .section-title {
       font-size: 1.4rem;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--secondary);
       margin: 30px 0 15px;
       display: flex;
       align-items: center;
@@ -131,8 +131,8 @@
 
     .card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(252, 191, 73, 0.15);
-      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(82, 183, 136, 0.2);
+      border-color: var(--secondary);
     }
 
     .card img {
@@ -172,7 +172,7 @@
     .price {
       font-size: 1.2rem;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--secondary);
     }
 
     .btn-add {
@@ -190,7 +190,7 @@
     }
 
     .btn-add:hover {
-      background-color: #d62828;
+      background-color: #1b4332;
     }
 
     .cart-bar {
@@ -216,7 +216,7 @@
 
     .cart-icon-wrap {
       position: relative;
-      background: var(--accent);
+      background: var(--secondary);
       color: #000;
       width: 45px;
       height: 45px;
@@ -232,7 +232,7 @@
       position: absolute;
       top: -4px;
       right: -4px;
-      background: var(--secondary);
+      background: var(--primary);
       color: white;
       font-size: 0.75rem;
       font-weight: bold;
@@ -247,7 +247,7 @@
     .cart-total {
       font-size: 1.1rem;
       font-weight: 800;
-      color: var(--accent);
+      color: var(--secondary);
     }
 
     .btn-checkout {
@@ -317,6 +317,16 @@
       font-size: 0.9rem;
     }
 
+    .bank-info-box {
+      background: #181818;
+      border: 1px dashed var(--secondary);
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+
     .qty-picker {
       display: flex;
       align-items: center;
@@ -369,36 +379,26 @@
       font-weight: bold;
       font-size: 0.9rem;
       margin: 10px 0 5px;
-      color: var(--accent);
-    }
-
-    .radio-group label {
-      display: block;
-      font-weight: normal;
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-      cursor: pointer;
-      color: #ccc;
+      color: var(--secondary);
     }
   </style>
 </head>
 <body>
 
   <header>
-    <!-- Logotipo cargado desde la carpeta local img/logo.png -->
     <div class="logo-container">
-      <img src="img/logo.png" alt="El Mandil de Ali Logo">
+      <img src="img/logo.png" alt="Cocina Familiar Gotita Logo" onerror="this.src='https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=300&q=80'">
     </div>
-    <h1>El Mandil de Ali</h1>
-    <p>¡Te llevamos el sabor a tus eventos y hogar! • Taquiza y Asados</p>
-    <span class="badge-delivery"><i class="fas fa-utensils"></i> Asados • Tacos • Pozole • Vitroleros</span>
+    <h1>Cocina Familiar Gotita</h1>
+    <p>Hecho con amor, para ti y tu familia</p>
+    <span class="badge-delivery"><i class="fas fa-motorcycle"></i> Envíos a Domicilio & Pedidos directos</span>
   </header>
 
   <div class="container">
-    <div class="section-title"><i class="fas fa-fire"></i> Platillos & Especialidades</div>
+    <div class="section-title"><i class="fas fa-utensils"></i> Platillos Principales & Guisados</div>
     <div class="menu-grid" id="dishes-grid"></div>
 
-    <div class="section-title"><i class="fas fa-glass-cheers"></i> Vitroleros de Agua & Bebidas</div>
+    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Refrescos</div>
     <div class="menu-grid" id="drinks-grid"></div>
   </div>
 
@@ -418,44 +418,83 @@
     </button>
   </div>
 
-  <!-- Modal de Personalización -->
+  <!-- Modal de Personalización Dinámico -->
   <div class="modal" id="custom-modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeCustomModal()">&times;</span>
-      <h3 id="modal-item-title" style="margin-bottom: 5px; color: var(--accent);">Personalizar</h3>
-      <p id="modal-item-price" style="color: var(--accent); font-weight: bold; margin-bottom: 10px;"></p>
+      <h3 id="modal-item-title" style="margin-bottom: 5px; color: var(--secondary);">Personalizar</h3>
+      <p id="modal-item-price" style="color: var(--secondary); font-weight: bold; margin-bottom: 10px;"></p>
 
       <div class="qty-picker">
-        <span class="opt-title" style="margin:0;">Cantidad:</span>
+        <span class="opt-title" style="margin:0; color:#fff;">Cantidad:</span>
         <button class="btn-qty-mod" onclick="changeQty(-1)">-</button>
         <span class="qty-number" id="modal-qty">1</span>
         <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
       </div>
 
+      <!-- Opciones para Platillos de Comida -->
       <div id="dish-options">
         <div class="form-group">
-          <label class="opt-title">Selección / Estilo:</label>
-          <div class="radio-group">
-            <label><input type="radio" name="term" value="Estándar / Surtido" checked> Estándar / Surtido</label>
-            <label><input type="radio" name="term" value="Bien servido / Extra carne"> Bien servido / Extra carne</label>
-            <label><input type="radio" name="term" value="Con complementos aparte"> Con complementos aparte</label>
-          </div>
+          <label class="opt-title">Guarnición o Acompañamiento:</label>
+          <select id="select-term">
+            <option value="Con Sopa Aguada y Arroz">Con Sopa Aguada y Arroz</option>
+            <option value="Solo Arroz">Solo Arroz</option>
+            <option value="Solo Sopa Aguada">Solo Sopa Aguada</option>
+          </select>
         </div>
 
         <div class="form-group">
-          <label class="opt-title">Salsa o Guarnición:</label>
+          <label class="opt-title">Complemento:</label>
           <select id="select-sauce">
-            <option value="Salsa Roja Casera">Salsa Roja Casera</option>
-            <option value="Salsa Verde con Aguacate">Salsa Verde con Aguacate</option>
-            <option value="Guacamole Extra">Guacamole Extra</option>
-            <option value="Sin Salsa / Sin Guarnición">Sin Salsa / Sin Guarnición</option>
+            <option value="Con Frijoles y Tortillas">Con Frijoles y Tortillas</option>
+            <option value="Solo Tortillas">Solo Tortillas</option>
+            <option value="Sin Frijoles">Sin Frijoles</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Agua Fresca -->
+      <div id="water-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona el Sabor del Agua:</label>
+          <select id="select-water-flavor">
+            <option value="Agua de Piña Natural">Agua de Piña Natural</option>
+            <option value="Horchata">Horchata</option>
+            <option value="Jamaica">Jamaica</option>
+            <option value="Tamarindo">Tamarindo</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Refrescos -->
+      <div id="soda-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona tu Refresco:</label>
+          <select id="select-soda-flavor">
+            <option value="Coca Cola">Coca Cola</option>
+            <option value="Coca Cero">Coca Cero</option>
+            <option value="Sprite">Sprite</option>
+            <option value="Delaware Punch">Delaware Punch</option>
+            <option value="Manzana">Manzana</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Opciones para Cervezas -->
+      <div id="beer-options" style="display: none;">
+        <div class="form-group">
+          <label class="opt-title">Selecciona tu Cerveza:</label>
+          <select id="select-beer-brand">
+            <option value="Corona Extra">Corona Extra</option>
+            <option value="Modelo Especial">Modelo Especial</option>
+            <option value="Victoria">Victoria</option>
           </select>
         </div>
       </div>
 
       <div class="form-group">
         <label class="opt-title">Instrucciones Especiales:</label>
-        <input type="text" id="custom-notes" placeholder="Ej. Sin cebolla, tortillas calientes, etc.">
+        <input type="text" id="custom-notes" placeholder="Ej. Sin cebolla, extra salsa, etc.">
       </div>
 
       <button class="btn-add" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;" onclick="confirmAddToCart()">
@@ -468,7 +507,7 @@
   <div class="modal" id="checkout-modal">
     <div class="modal-content">
       <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
-      <h3 style="margin-bottom: 15px; color: var(--accent);">Resumen de tu Pedido</h3>
+      <h3 style="margin-bottom: 15px; color: var(--secondary);">Resumen de tu Pedido</h3>
       
       <div id="cart-list" style="margin-bottom: 15px;"></div>
 
@@ -485,24 +524,35 @@
 
       <div class="form-group">
         <label>Nombre del Cliente:</label>
-        <input type="text" id="client-name" placeholder="Ej. Alberto Jasso">
+        <input type="text" id="client-name" placeholder="Ej. Doña Mary">
       </div>
 
       <div class="form-group" id="address-group" style="display: none;">
         <label>Dirección de Entrega / Referencia:</label>
-        <input type="text" id="client-address" placeholder="Ej. Calle Principal #123">
+        <input type="text" id="client-address" placeholder="Ej. Calle Juárez #123">
       </div>
 
       <div class="form-group">
         <label>Método de Pago:</label>
-        <select id="payment-method">
+        <select id="payment-method" onchange="handlePaymentChange()">
           <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
-          <option value="Transferencia">Transferencia Bancaria (STP / Mercado Pago)</option>
-          <option value="Tarjeta">Tarjeta de Débito / Crédito (Terminal física)</option>
+          <option value="Transferencia">Transferencia Bancaria</option>
+          <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
         </select>
       </div>
 
-      <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0; color: var(--accent);" id="final-total">
+      <!-- Datos Bancarios condicionales para Transferencia -->
+      <div class="form-group" id="bank-info-group" style="display: none;">
+        <div class="bank-info-box">
+          <strong>🏦 Datos para Transferencia:</strong><br>
+          Banco: BBVA / Bancomer<br>
+          Clabe: <code>1234 5678 9012 3456 78</code><br>
+          Titular: Cocina Familiar Gotita<br>
+          <em>* Favor de adjuntar su comprobante por este medio al enviar su pedido.</em>
+        </div>
+      </div>
+
+      <div style="font-size: 1.1rem; font-weight: 800; text-align: right; margin: 15px 0; color: var(--secondary);" id="final-total">
         Total: $0.00
       </div>
 
@@ -514,16 +564,17 @@
 
   <script>
     const dishes = [
-      { id: 1, name: "Asado Mixto o Argentino (Porción)", price: 180, desc: "Cortes finos a la parrilla, chorizo, acompañados de guarnición, limones y tortillas.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 2, name: "Orden de Tacos Especiales (5 pzs)", price: 110, desc: "Servidos con su verdura, limones, salsa de la casa y tortillas recién hechas.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 3, name: "Pozole Tradicional Estilo Ali", price: 130, desc: "Platillo pozolero bien servido con carne, lechuga, rábanos, tostadas y salsa.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", isDrink: false },
-      { id: 4, name: "Taquiza para Eventos (Paquete Base)", price: 1200, desc: "Ideal para reuniones, fiestas y cumpleaños. Incluye limones, salsas, guacamole, tortillas y desechables.", img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=80", isDrink: false }
+      { id: 1, name: "Pollo a la Naranja", price: 120, desc: "Servido con su porción de sopa aguada, arroz al cilindro, frijoles y tortillas hechas a mano.", img: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 2, name: "Carne de Puerco en Adobo", price: 125, desc: "Acompañado de sopa aguada, arroz, frijoles de la olla y tortillas calientes.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 3, name: "Pechuga Empanizada con Ensalada", price: 130, desc: "Incluye sopa aguada, arroz, ensalada fresca de la casa y tortillas.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 4, name: "Enchiladas Caseras (Orden)", price: 95, desc: "Bañadas en salsa especial de la casa, crema, queso fresco y cebolla.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", type: "dish" },
+      { id: 5, name: "Chilaquiles Verdes o Rojos", price: 90, desc: "Con pollo deshebrado, crema, queso y frijoles refritos de la casa.", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=500&q=80", type: "dish" }
     ];
 
     const drinks = [
-      { id: 101, name: "Vitrolero de Agua - Horchata (1 Litro)", price: 45, desc: "Agua fresca natural preparada al estilo tradicional con toque de canela.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true },
-      { id: 102, name: "Vitrolero de Agua - Jamaica (1 Litro)", price: 45, desc: "Refrescante agua de flor de jamaica natural bien fría.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", isDrink: true },
-      { id: 103, name: "Vitrolero de Agua - Tamarindo (1 Litro)", price: 45, desc: "Deliciosa y tradicional agua de pulpa de tamarindo natural.", img: "https://images.unsplash.com/photo-1523371054106-bbf80586c38c?auto=format&fit=crop&w=500&q=80", isDrink: true }
+      { id: 101, name: "Agua Fresca de Piña Natural (1 Litro)", price: 40, desc: "Agua natural del día elaborada con fruta fresca.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
+      { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite, Delaware Punch o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" },
+      { id: 103, name: "Cerveza Bien Fría", price: 45, desc: "Elige tu marca favorita: Corona Extra, Modelo Especial o Victoria.", img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=500&q=80", type: "beer" }
     ];
 
     let cart = [];
@@ -561,7 +612,21 @@
       document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
-      document.getElementById('dish-options').style.display = selectedProduct.isDrink ? 'none' : 'block';
+      document.getElementById('dish-options').style.display = 'none';
+      document.getElementById('water-options').style.display = 'none';
+      document.getElementById('soda-options').style.display = 'none';
+      document.getElementById('beer-options').style.display = 'none';
+
+      if (selectedProduct.type === 'dish') {
+        document.getElementById('dish-options').style.display = 'block';
+      } else if (selectedProduct.type === 'water') {
+        document.getElementById('water-options').style.display = 'block';
+      } else if (selectedProduct.type === 'soda') {
+        document.getElementById('soda-options').style.display = 'block';
+      } else if (selectedProduct.type === 'beer') {
+        document.getElementById('beer-options').style.display = 'block';
+      }
+
       document.getElementById('custom-modal').style.display = 'flex';
     }
 
@@ -576,16 +641,28 @@
     }
 
     function confirmAddToCart() {
-      const term = selectedProduct.isDrink ? 'Vitrolero' : document.querySelector('input[name="term"]:checked').value;
-      const sauce = selectedProduct.isDrink ? 'N/A' : document.getElementById('select-sauce').value;
+      let detail1 = '';
+      let detail2 = '';
+
+      if (selectedProduct.type === 'dish') {
+        detail1 = document.getElementById('select-term').value;
+        detail2 = document.getElementById('select-sauce').value;
+      } else if (selectedProduct.type === 'water') {
+        detail1 = 'Sabor: ' + document.getElementById('select-water-flavor').value;
+      } else if (selectedProduct.type === 'soda') {
+        detail1 = 'Refresco: ' + document.getElementById('select-soda-flavor').value;
+      } else if (selectedProduct.type === 'beer') {
+        detail1 = 'Cerveza: ' + document.getElementById('select-beer-brand').value;
+      }
+
       const notes = document.getElementById('custom-notes').value;
 
       const itemDetail = {
         ...selectedProduct,
         cartId: Date.now(),
         qty: currentQty,
-        term,
-        sauce,
+        detail1,
+        detail2,
         notes
       };
 
@@ -622,6 +699,17 @@
       updateTotal();
     }
 
+    function handlePaymentChange() {
+      const paymentMethod = document.getElementById('payment-method').value;
+      const bankInfoGroup = document.getElementById('bank-info-group');
+
+      if (paymentMethod === 'Transferencia') {
+        bankInfoGroup.style.display = 'block';
+      } else {
+        bankInfoGroup.style.display = 'none';
+      }
+    }
+
     function updateTotal() {
       const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
       const deliveryVal = parseInt(document.getElementById('delivery-zone').value.split('|')[0] || 0);
@@ -646,7 +734,7 @@
           <div>
             <strong style="font-size:0.95rem; color: #fff;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
             <div style="font-size:0.75rem; color: #aaa;">
-              ${!item.isDrink ? item.term + ' | ' + item.sauce : 'Bebida'} ${item.notes ? '| Nota: ' + item.notes : ''}
+              ${item.type === 'dish' ? item.detail1 + ' | ' + item.detail2 : item.detail1} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
           <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:#ff6b6b;">&times;</button>
@@ -661,6 +749,7 @@
       }
       renderCartList();
       handleDeliveryChange();
+      handlePaymentChange();
       document.getElementById('checkout-modal').style.display = 'flex';
     }
 
@@ -699,22 +788,33 @@
         });
       }
 
-      let message = `*¡NUEVO PEDIDO - EL MANDIL DE ALI!* 🌮🔥\n\n`;
+      let message = `*¡NUEVO PEDIDO - COCINA FAMILIAR GOTITA!* 🍲✨\n\n`;
       message += `*Cliente:* ${name}\n`;
       message += `*Modalidad:* ${zoneName}\n`;
       if (deliveryCost > 0) {
         message += `*Dirección:* ${address}\n`;
       }
-      message += `*Método de Pago:* ${paymentType}\n\n`;
+      message += `*Método de Pago:* ${paymentType}\n`;
+
+      if (paymentType === 'Transferencia') {
+        message += `\n🏦 *DATOS PARA TRANSFERENCIA:*\n`;
+        message += `• Banco: BBVA / Bancomer\n`;
+        message += `• CLABE: 1234 5678 9012 3456 78\n`;
+        message += `• Titular: Cocina Familiar Gotita\n`;
+        message += `*(Favor de adjuntar su comprobante por este medio)*\n`;
+      }
+      message += `\n`;
 
       message += `--- *DETALLE DEL PEDIDO* ---\n`;
 
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
-        if(!item.isDrink) {
-          message += `   • Estilo: ${item.term}\n`;
-          message += `   • Salsa/Guarnición: ${item.sauce}\n`;
+        if(item.type === 'dish') {
+          message += `   • Acompañamiento: ${item.detail1}\n`;
+          message += `   • Complemento: ${item.detail2}\n`;
+        } else {
+          message += `   • Opción: ${item.detail1}\n`;
         }
         if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
@@ -724,21 +824,7 @@
       message += `*Costo de Envío:* $${deliveryCost}.00 MXN\n`;
       message += `*TOTAL A PAGAR:* *$${grandTotal}.00 MXN*\n\n`;
 
-      if (paymentType === 'Transferencia') {
-        message += `📌 *DATOS PARA TRANSFERENCIA:* \n`;
-        message += `• *Banco/Plataforma:* Mercado Pago (STP)\n`;
-        message += `• *CLABE:* 722969010658559464\n`;
-        message += `• *Titular:* Juan Alberto Jasso Chavez\n`;
-        message += `👉 *Por favor adjunta la captura del pago a este mensaje para comenzar la preparación.*\n`;
-      } else if (paymentType === 'Efectivo') {
-        message += `📌 *NOTA PAGO EN EFECTIVO:* \n`;
-        message += `👉 Por favor ten la cantidad exacta o indícanos aquí si requieres cambio de qué billete.\n`;
-      } else if (paymentType === 'Tarjeta') {
-        message += `📌 *NOTA PAGO CON TARJETA:* \n`;
-        message += `👉 Se presentará terminal al entregar/recoger. Ten a la mano tu tarjeta con fondos disponibles.\n`;
-      }
-
-      const phone = "527717011984";
+      const phone = "527792179612";
       const encodedUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
       window.open(encodedUrl, '_blank');
