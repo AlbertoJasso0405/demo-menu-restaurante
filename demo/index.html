@@ -387,7 +387,7 @@
 
   <header>
     <div class="logo-container">
-      <img src="img/logo.jpeg" alt="Cocina Familiar Gotita Logo" onerror="this.src='https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=300&q=80'">
+      <img src="logo.jpeg" alt="Cocina Familiar Gotita Logo" onerror="this.src='https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=300&q=80'">
     </div>
     <h1>Cocina Familiar Gotita</h1>
     <p>Hecho con amor, para ti y tu familia</p>
@@ -398,7 +398,7 @@
     <div class="section-title"><i class="fas fa-utensils"></i> Platillos Principales & Guisados</div>
     <div class="menu-grid" id="dishes-grid"></div>
 
-    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Refrescos</div>
+    <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Aguas Frescas</div>
     <div class="menu-grid" id="drinks-grid"></div>
   </div>
 
@@ -435,7 +435,7 @@
       <!-- Opciones para Platillos de Comida -->
       <div id="dish-options">
         <div class="form-group">
-          <label class="opt-title">Guarnición o Acompañamiento:</label>
+          <label class="opt-title">Guarnición:</label>
           <select id="select-term">
             <option value="Con Sopa Aguada y Arroz">Con Sopa Aguada y Arroz</option>
             <option value="Solo Arroz">Solo Arroz</option>
@@ -456,12 +456,11 @@
       <!-- Opciones para Agua Fresca -->
       <div id="water-options" style="display: none;">
         <div class="form-group">
-          <label class="opt-title">Selecciona el Sabor del Agua:</label>
+          <label class="opt-title">Selecciona el Sabor de Agua:</label>
           <select id="select-water-flavor">
             <option value="Agua de Piña Natural">Agua de Piña Natural</option>
-            <option value="Horchata">Horchata</option>
-            <option value="Jamaica">Jamaica</option>
-            <option value="Tamarindo">Tamarindo</option>
+            <option value="Agua de Horchata">Agua de Horchata</option>
+            <option value="Agua de Jamaica">Agua de Jamaica</option>
           </select>
         </div>
       </div>
@@ -474,20 +473,7 @@
             <option value="Coca Cola">Coca Cola</option>
             <option value="Coca Cero">Coca Cero</option>
             <option value="Sprite">Sprite</option>
-            <option value="Delaware Punch">Delaware Punch</option>
             <option value="Manzana">Manzana</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Opciones para Cervezas -->
-      <div id="beer-options" style="display: none;">
-        <div class="form-group">
-          <label class="opt-title">Selecciona tu Cerveza:</label>
-          <select id="select-beer-brand">
-            <option value="Corona Extra">Corona Extra</option>
-            <option value="Modelo Especial">Modelo Especial</option>
-            <option value="Victoria">Victoria</option>
           </select>
         </div>
       </div>
@@ -537,7 +523,6 @@
         <select id="payment-method" onchange="handlePaymentChange()">
           <option value="Efectivo">Efectivo (Pago al entregar/recoger)</option>
           <option value="Transferencia">Transferencia Bancaria</option>
-          <option value="Tarjeta">Tarjeta de Débito / Crédito</option>
         </select>
       </div>
 
@@ -546,7 +531,7 @@
         <div class="bank-info-box">
           <strong>🏦 Datos para Transferencia:</strong><br>
           Banco: BBVA / Bancomer<br>
-          Clabe: <code>1234 5678 9012 3456 78</code><br>
+          CLABE: <code>1234 5678 9012 3456 78</code><br>
           Titular: Cocina Familiar Gotita<br>
           <em>* Favor de adjuntar su comprobante por este medio al enviar su pedido.</em>
         </div>
@@ -572,9 +557,8 @@
     ];
 
     const drinks = [
-      { id: 101, name: "Agua Fresca de Piña Natural (1 Litro)", price: 40, desc: "Agua natural del día elaborada con fruta fresca.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
-      { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite, Delaware Punch o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" },
-      { id: 103, name: "Cerveza Bien Fría", price: 45, desc: "Elige tu marca favorita: Corona Extra, Modelo Especial o Victoria.", img: "https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&w=500&q=80", type: "beer" }
+      { id: 101, name: "Agua Fresca del Día (1 Litro)", price: 40, desc: "Elige tu favorita: Piña Natural, Horchata o Jamaica bien frías.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
+      { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" }
     ];
 
     let cart = [];
@@ -615,7 +599,6 @@
       document.getElementById('dish-options').style.display = 'none';
       document.getElementById('water-options').style.display = 'none';
       document.getElementById('soda-options').style.display = 'none';
-      document.getElementById('beer-options').style.display = 'none';
 
       if (selectedProduct.type === 'dish') {
         document.getElementById('dish-options').style.display = 'block';
@@ -623,8 +606,6 @@
         document.getElementById('water-options').style.display = 'block';
       } else if (selectedProduct.type === 'soda') {
         document.getElementById('soda-options').style.display = 'block';
-      } else if (selectedProduct.type === 'beer') {
-        document.getElementById('beer-options').style.display = 'block';
       }
 
       document.getElementById('custom-modal').style.display = 'flex';
@@ -651,8 +632,6 @@
         detail1 = 'Sabor: ' + document.getElementById('select-water-flavor').value;
       } else if (selectedProduct.type === 'soda') {
         detail1 = 'Refresco: ' + document.getElementById('select-soda-flavor').value;
-      } else if (selectedProduct.type === 'beer') {
-        detail1 = 'Cerveza: ' + document.getElementById('select-beer-brand').value;
       }
 
       const notes = document.getElementById('custom-notes').value;
@@ -667,15 +646,6 @@
       };
 
       cart.push(itemDetail);
-
-      if (typeof gtag === 'function') {
-        gtag('event', 'add_to_cart', {
-          item_name: selectedProduct.name,
-          value: selectedProduct.price * currentQty,
-          currency: 'MXN'
-        });
-      }
-
       closeCustomModal();
       updateTotal();
     }
@@ -779,15 +749,6 @@
       cart.forEach(item => subtotal += (item.price * item.qty));
       const grandTotal = subtotal + deliveryCost;
 
-      if (typeof gtag === 'function') {
-        gtag('event', 'generate_lead', {
-          currency: 'MXN',
-          value: grandTotal,
-          payment_type: paymentType,
-          delivery_zone: zoneName
-        });
-      }
-
       let message = `*¡NUEVO PEDIDO - COCINA FAMILIAR GOTITA!* 🍲✨\n\n`;
       message += `*Cliente:* ${name}\n`;
       message += `*Modalidad:* ${zoneName}\n`;
@@ -811,7 +772,7 @@
         const itemTotal = item.price * item.qty;
         message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
         if(item.type === 'dish') {
-          message += `   • Acompañamiento: ${item.detail1}\n`;
+          message += `   • Guarnición: ${item.detail1}\n`;
           message += `   • Complemento: ${item.detail2}\n`;
         } else {
           message += `   • Opción: ${item.detail1}\n`;
