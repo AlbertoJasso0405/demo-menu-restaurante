@@ -387,7 +387,7 @@
 
   <header>
     <div class="logo-container">
-      <img src="logo.jpeg" alt="Cocina Familiar Gotita Logo" onerror="this.src='https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=300&q=80'">
+      <img src="img/logo.jpeg" alt="Cocina Familiar Gotita Logo" onerror="this.src='https://images.unsplash.com/photo-1543353071-873f17a7a088?auto=format&fit=crop&w=300&q=80'">
     </div>
     <h1>Cocina Familiar Gotita</h1>
     <p>Hecho con amor, para ti y tu familia</p>
@@ -395,7 +395,7 @@
   </header>
 
   <div class="container">
-    <div class="section-title"><i class="fas fa-utensils"></i> Platillos Principales & Guisados</div>
+    <div class="section-title"><i class="fas fa-utensils"></i> Menú Ejecutivo & Platillos</div>
     <div class="menu-grid" id="dishes-grid"></div>
 
     <div class="section-title"><i class="fas fa-glass-cheers"></i> Bebidas & Aguas Frescas</div>
@@ -432,23 +432,13 @@
         <button class="btn-qty-mod" onclick="changeQty(1)">+</button>
       </div>
 
-      <!-- Opciones para Platillos de Comida -->
-      <div id="dish-options">
+      <!-- Opciones específicas para el Menú Ejecutivo -->
+      <div id=" ejecutivo-options" style="display: none;">
         <div class="form-group">
-          <label class="opt-title">Guarnición:</label>
-          <select id="select-term">
-            <option value="Con Sopa Aguada y Arroz">Con Sopa Aguada y Arroz</option>
-            <option value="Solo Arroz">Solo Arroz</option>
-            <option value="Solo Sopa Aguada">Solo Sopa Aguada</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label class="opt-title">Complemento:</label>
-          <select id="select-sauce">
-            <option value="Con Frijoles y Tortillas">Con Frijoles y Tortillas</option>
-            <option value="Solo Tortillas">Solo Tortillas</option>
-            <option value="Sin Frijoles">Sin Frijoles</option>
+          <label class="opt-title">Elige tu Platillo Fuerte:</label>
+          <select id="select-main-guisado">
+            <option value="Pollo a la Naranja">Pollo a la Naranja</option>
+            <option value="Carne de Puerco en Adobo">Carne de Puerco en Adobo</option>
           </select>
         </div>
       </div>
@@ -503,8 +493,7 @@
         <label>Tipo de Servicio / Entrega:</label>
         <select id="delivery-zone" onchange="handleDeliveryChange()">
           <option value="0|Pasar a recoger al local (Sin costo)">Pasar a recoger al local - $0</option>
-          <option value="25|Servicio a Domicilio Zona Local">Servicio a Domicilio Zona Local - $25</option>
-          <option value="40|Servicio a Domicilio Zona Extendida">Servicio a Domicilio Zona Extendida - $40</option>
+          <option value="25|Servicio a Domicilio">Servicio a Domicilio - $25</option>
         </select>
       </div>
 
@@ -549,15 +538,14 @@
 
   <script>
     const dishes = [
-      { id: 1, name: "Pollo a la Naranja", price: 120, desc: "Servido con su porción de sopa aguada, arroz al cilindro, frijoles y tortillas hechas a mano.", img: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=500&q=80", type: "dish" },
-      { id: 2, name: "Carne de Puerco en Adobo", price: 125, desc: "Acompañado de sopa aguada, arroz, frijoles de la olla y tortillas calientes.", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", type: "dish" },
-      { id: 3, name: "Pechuga Empanizada con Ensalada", price: 130, desc: "Incluye sopa aguada, arroz, ensalada fresca de la casa y tortillas.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", type: "dish" },
-      { id: 4, name: "Enchiladas Caseras (Orden)", price: 95, desc: "Bañadas en salsa especial de la casa, crema, queso fresco y cebolla.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", type: "dish" },
-      { id: 5, name: "Chilaquiles Verdes o Rojos", price: 90, desc: "Con pollo deshebrado, crema, queso y frijoles refritos de la casa.", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=500&q=80", type: "dish" }
+      { id: 1, name: "Menú Ejecutivo del Día", price: 80, desc: "Incluye: Sopa aguada, arroz al cilindro, frijoles de la olla, tortillas y vaso de agua de piña. (Elige tu guisado fuerte).", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", type: "ejecutivo" },
+      { id: 2, name: "Enchiladas Caseras (Orden)", price: 95, desc: "Bañadas en salsa especial de la casa, crema, queso fresco y cebolla.", img: "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?auto=format&fit=crop&w=500&q=80", type: "other" },
+      { id: 3, name: "Chilaquiles Verdes o Rojos", price: 90, desc: "Con pollo deshebrado, crema, queso y frijoles refritos de la casa.", img: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=500&q=80", type: "other" },
+      { id: 4, name: "Pechuga Empanizada con Ensalada", price: 130, desc: "Incluye guarnición de arroz, ensalada fresca de la casa y tortillas.", img: "https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=500&q=80", type: "other" }
     ];
 
     const drinks = [
-      { id: 101, name: "Agua Fresca del Día (1 Litro)", price: 40, desc: "Elige tu favorita: Piña Natural, Horchata o Jamaica bien frías.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
+      { id: 101, name: "Agua Fresca Extra (1 Litro)", price: 40, desc: "Elige tu favorita: Piña Natural, Horchata o Jamaica bien frías.", img: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=500&q=80", type: "water" },
       { id: 102, name: "Refresco Frío (Lata / Botella)", price: 30, desc: "Elige tu sabor preferido: Coca Cola, Coca Cero, Sprite o Manzana.", img: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=500&q=80", type: "soda" }
     ];
 
@@ -596,12 +584,12 @@
       document.getElementById('modal-item-price').innerText = `$${selectedProduct.price}.00 MXN c/u`;
       document.getElementById('custom-notes').value = '';
 
-      document.getElementById('dish-options').style.display = 'none';
+      document.getElementById('ejecutivo-options').style.display = 'none';
       document.getElementById('water-options').style.display = 'none';
       document.getElementById('soda-options').style.display = 'none';
 
-      if (selectedProduct.type === 'dish') {
-        document.getElementById('dish-options').style.display = 'block';
+      if (selectedProduct.type === 'ejecutivo') {
+        document.getElementById('ejecutivo-options').style.display = 'block';
       } else if (selectedProduct.type === 'water') {
         document.getElementById('water-options').style.display = 'block';
       } else if (selectedProduct.type === 'soda') {
@@ -623,11 +611,9 @@
 
     function confirmAddToCart() {
       let detail1 = '';
-      let detail2 = '';
 
-      if (selectedProduct.type === 'dish') {
-        detail1 = document.getElementById('select-term').value;
-        detail2 = document.getElementById('select-sauce').value;
+      if (selectedProduct.type === 'ejecutivo') {
+        detail1 = 'Guisado Fuerte: ' + document.getElementById('select-main-guisado').value;
       } else if (selectedProduct.type === 'water') {
         detail1 = 'Sabor: ' + document.getElementById('select-water-flavor').value;
       } else if (selectedProduct.type === 'soda') {
@@ -641,7 +627,6 @@
         cartId: Date.now(),
         qty: currentQty,
         detail1,
-        detail2,
         notes
       };
 
@@ -704,7 +689,7 @@
           <div>
             <strong style="font-size:0.95rem; color: #fff;">(${item.qty}x) ${item.name}</strong> - $${item.price * item.qty}
             <div style="font-size:0.75rem; color: #aaa;">
-              ${item.type === 'dish' ? item.detail1 + ' | ' + item.detail2 : item.detail1} ${item.notes ? '| Nota: ' + item.notes : ''}
+              ${item.detail1 ? item.detail1 : ''} ${item.notes ? '| Nota: ' + item.notes : ''}
             </div>
           </div>
           <button class="btn-qty" onclick="removeFromCart(${item.cartId})" style="color:#ff6b6b;">&times;</button>
@@ -771,11 +756,9 @@
       cart.forEach((item, index) => {
         const itemTotal = item.price * item.qty;
         message += `\n*${index + 1}. (${item.qty}x) ${item.name}* ($${itemTotal})\n`;
-        if(item.type === 'dish') {
-          message += `   • Guarnición: ${item.detail1}\n`;
-          message += `   • Complemento: ${item.detail2}\n`;
-        } else {
-          message += `   • Opción: ${item.detail1}\n`;
+        if(item.detail1) message += `   • ${item.detail1}\n`;
+        if(item.type === 'ejecutivo') {
+          message += `   • Incluye: Sopa aguada, arroz, frijoles, tortillas y agua de piña.\n`;
         }
         if (item.notes) message += `   • Nota: ${item.notes}\n`;
       });
